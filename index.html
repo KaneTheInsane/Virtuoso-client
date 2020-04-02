@@ -1,17 +1,104 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <title>Musician Practice Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Oxanium&amp;=swap" rel="stylesheet">
+    <!-- Do not add `link` tags-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <h1>Browser Template</h1>
+    <!-- Do not add `script` tags-->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <h1 class="accent">Musician Practice Tool</h1>
+          </li>
+            <!-- Sign up -->
+          <li class="nav-item dropdown my-2 my-lg-0">
+            <a class="nav-link btn btn-outline-dark my-2 my-sm-0" href="#" id="sign-up-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sign up
+            </a>
+            <div id="sign-up-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <form id="sign-up">
+                <fieldset>
+                  <legend>Sign up!</legend>
+                    <input type="text" name="credentials[email]" placeholder="email@example.com"><br>
+                    <input type="password" name="credentials[password]" placeholder="Password"><br>
+                    <input type="password" name="credentials[password_confirmation]" placeholder="Confirm password"><br>
+                    <input type="submit" value="Sign up!" class="button"><br>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+            <!-- Sign In -->
+          <li class="nav-item dropdown my-2 my-lg-0 collapse.show">
+            <a class="nav-link btn btn-outline-dark my-2 my-sm-0" href="#" id="sign-in-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sign in
+            </a>
+              <div id="sign-in-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <form id="sign-in">
+                  <legend>Sign in!</legend>
+                  <input type="text" name="credentials[email]" placeholder="email@example.com"><br>
+                  <input type="password" name="credentials[password]" placeholder="Password"><br>
+                  <input type="submit" value="Sign in!" class="button"><br>
+                </form>
+              </div>
+            </li>
+            <!-- Change Password -->
+            <li class="nav-item dropdown my-2 my-lg-0">
+              <a class="nav-link btn btn-outline-dark my-2 my-sm-0 hidden" href="#" id="change-password-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Change Pass
+              </a>
+              <div id="change-password-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <form id="change-password">
+                  <legend>Change Password</legend>
+                  <input type="password" name="passwords[old]" placeholder="Old Password">
+                  <input type="password" name="passwords[new]" placeholder="New Password">
+                  <input type="submit" value="Change Password">
+                </form>
+              </div>
+            </li>
+            <!-- New game -->
+            <li class="nav-item dropdown my-2 my-lg-0">
+              <a class="nav-link btn btn-outline-dark my-2 my-sm-0 hidden" href="#" id="new-game-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                New Game
+              </a>
+              <div id="new-game-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <form id="new-game" class="hide">
+                  <fieldset>
+                    <input id="pvp-game" type="submit" value="PvP" class="btn btn-outline-dark my-2 my-sm-0">
+                  </fieldset>
+                  <!-- <fieldset>
+                    <input id="ai-game" type="submit" value="AI" class="btn btn-outline-dark my-2 my-sm-0">
+                  </fieldset> -->
+                </form>
+              </div>
+            </li>
+            <!-- Sign out -->
+            <li>
+              <form id="sign-out-btn" class="form-inline my-2 my-lg-0 hidden">
+                <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="Sign Out">
+              </form>
+            </li>
+          </ul>
+          <!-- API Messages -->
+          <h2 id="api-message"></h2>
+        </div>
+      </nav>
+      <form id="test-btn" class="form-inline my-2 my-lg-0">
+        <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="Test">
+      </form>
+      <!-- Game Messages -->
+      <h2 id='game-state-message' class="hidden">Turn: <span id="game-state-span"></span></h2>
+      <h2 id='invalid-move-message'></h2>
+      <!-- Footer -->
+      <footer id="sticky-footer" class="py-4 accent">
+        <a class="nav-link" href="https://www.linkedin.com/in/kanetwofeathers/" target="_blank">© Kane Two Feathers 2020</a>
+      </footer>
     </body>
 </html>
