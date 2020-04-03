@@ -35,18 +35,52 @@ const onChangePassword = function (event) {
 const onSignOut = function (event) {
   event.preventDefault()
   // console.log('Sign out')
-  if (store.guestAccount === false) {
-    api.signOut()
-      .then(ui.signOutSuccess)
-      .catch(ui.signOutFailure)
-  } else {
-    ui.signInSuccess()
-  }
+  api.signOut()
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutFailure)
 }
 
-const test = function (event) {
+const onIndexPractices = function (event) {
   event.preventDefault()
   console.log('test')
+  api.indexPractices()
+    .then(ui.indexPracticesSuccess)
+    .catch(console.log('error'))
+}
+
+const onCreatePractice = function (event) {
+  event.preventDefault()
+  console.log('test')
+  const data = getFormFields(event.target)
+  console.log(data)
+  api.createPractice(data)
+    .then(ui.createPracticeSuccess)
+    .catch(console.log('error'))
+}
+
+const onUpdatePractice = function (event) {
+  event.preventDefault()
+  console.log('test')
+  const data = getFormFields(event.target)
+  console.log(data)
+  console.log(data.id)
+  console.log(data.practice)
+  store.updateId = data.id
+  console.log(store.updateId)
+  api.updatePractice(data)
+    .then(ui.updatePracticeSuccess)
+    .catch(console.log('error'))
+}
+
+const onDeletePractice = function (event) {
+  event.preventDefault()
+  console.log('test')
+  const data = getFormFields(event.target)
+  console.log(data)
+  store.deleteId = data.id
+  api.deletePractice(data)
+    .then(ui.deletePracticeSuccess)
+    .catch(console.log('error'))
 }
 
 module.exports = {
@@ -54,5 +88,8 @@ module.exports = {
   onSignIn,
   onChangePassword,
   onSignOut,
-  test
+  onIndexPractices,
+  onCreatePractice,
+  onUpdatePractice,
+  onDeletePractice
 }

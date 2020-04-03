@@ -32,7 +32,7 @@ const changePassword = function (data) {
 
 const signOut = function () {
   return $.ajax({
-    url: config.apiUrl + '/Practices',
+    url: config.apiUrl + '/sign-out',
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -40,14 +40,56 @@ const signOut = function () {
   })
 }
 
-const getPractices = function () {
+const indexPractices = function (data) {
   return $.ajax({
-    url
+    url: config.apiUrl + '/practices',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
   })
 }
+
+const createPractice = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/practices',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
+const updatePractice = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/practices/' + store.updateId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
+const deletePractice = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/practices/' + store.deleteId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
-  signOut
+  signOut,
+  indexPractices,
+  createPractice,
+  updatePractice,
+  deletePractice
 }

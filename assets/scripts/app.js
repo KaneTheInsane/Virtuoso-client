@@ -8,13 +8,18 @@ const authEvents = require('./auth-events.js')
 
 $(() => {
   // Account actions
-  $('#test-btn').on('submit', authEvents.test)
   $('#sign-up').on('submit', authEvents.onSignUp)
   $('#sign-in').on('submit', authEvents.onSignIn)
   $('#change-password').on('submit', authEvents.onChangePassword)
   $('#sign-out-btn').on('submit', authEvents.onSignOut)
 
-  // Dropdown menu close
+  // User specific actions
+  $('#index-prt-btn').on('submit', authEvents.onIndexPractices)
+  $('#create-prt').on('submit', authEvents.onCreatePractice)
+  $('#update-prt').on('submit', authEvents.onUpdatePractice)
+  $('#delete-prt').on('submit', authEvents.onDeletePractice)
+
+  // Dropdown menu closed after submitting
   $('#sign-in-drop').on('submit', function () {
     $('#sign-in-btn').dropdown('toggle')
   })

@@ -89,6 +89,30 @@ const signOutFailure = function () {
 //   console.log('signOutFailure error is: ', error)
 }
 
+const indexPracticesSuccess = function (data) {
+  $('#crud-message').text('List of Practices')
+  console.log(data)
+  store.practices = data
+}
+
+const createPracticeSuccess = function (data) {
+  $('#crud-message').text('Created New Practice!')
+  console.log(data)
+  store.practices = data
+}
+
+const updatePracticeSuccess = function (data) {
+  $('#crud-message').text(`Updated Practice ${store.updateId}!`)
+  console.log(data)
+  store.practices = data
+}
+
+const deletePracticeSuccess = function (data) {
+  $('#crud-message').text(`Deleted Practice ${store.deleteId}!`)
+  console.log(data)
+  store.practices = data
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -97,5 +121,9 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   signOutSuccess,
-  signOutFailure
+  signOutFailure,
+  indexPracticesSuccess,
+  createPracticeSuccess,
+  updatePracticeSuccess,
+  deletePracticeSuccess
 }
