@@ -1,5 +1,7 @@
 'use strict'
 
+const indexPracticesTemplate = require('./templates/practice-listing.handlebars')
+
 const store = require('./store')
 
 const signUpSuccess = function (data) {
@@ -11,7 +13,6 @@ const signUpSuccess = function (data) {
   store.user = data.user
   // future auto sign in
   // setTimeout((signInSuccess(data)), 2000)
-  // console.log('signUpSuccess data is: ', data)
 }
 
 const signUpFailure = function () {
@@ -20,11 +21,9 @@ const signUpFailure = function () {
   $('#api-message').addClass('failure')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  // console.log('signUpFailure error is: ', error)
 }
 
 const signInSuccess = function (data) {
-  // console.log(data)
   $('#api-message').text('You are signed as ' + data.user.email)
   $('#api-message').removeClass()
   $('#api-message').addClass('success')
@@ -34,7 +33,7 @@ const signInSuccess = function (data) {
   $('#sign-up-btn').addClass('hidden')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  // console.log('signInSuccess data is: ', data)
+  $('.secondary').removeClass('hidden')
   store.user = data.user
 }
 
@@ -44,7 +43,6 @@ const signInFailure = function () {
   $('#api-message').addClass('failure')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  // console.log('signInFailure error is: ', error)
 }
 
 const changePasswordSuccess = function (data) {
@@ -53,7 +51,6 @@ const changePasswordSuccess = function (data) {
   $('#api-message').addClass('success')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  // console.log('changePasswordSuccess data is: ', data)
 }
 
 const changePasswordFailure = function () {
@@ -62,7 +59,6 @@ const changePasswordFailure = function () {
   $('#api-message').addClass('failure')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  // console.log('changePasswordFailure error is: ', error)
 }
 
 const signOutSuccess = function (data) {
@@ -77,7 +73,8 @@ const signOutSuccess = function (data) {
   $('.box').text('')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  // console.log('signOutSuccess data is: ', data)
+  $('.secondary').addClass('hidden')
+  $('.content').html('')
 }
 
 const signOutFailure = function () {
@@ -86,10 +83,11 @@ const signOutFailure = function () {
   $('#api-message').addClass('failure')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-//   console.log('signOutFailure error is: ', error)
 }
 
 const indexPracticesSuccess = function (data) {
+  const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
+  $('.content').html(indexPracticesHtml)
   $('#crud-message').text('List of Practices')
   console.log(data)
   store.practices = data
@@ -113,6 +111,30 @@ const deletePracticeSuccess = function (data) {
   store.practices = data
 }
 
+const indexPracticesFailure = function (data) {
+  $('#crud-message').text('Failed to Find List')
+  console.log(data)
+  store.practices = data
+}
+
+const createPracticeFailure = function (data) {
+  $('#crud-message').text('Error on Create')
+  console.log(data)
+  store.practices = data
+}
+
+const updatePracticeFailure = function (data) {
+  $('#crud-message').text(`Error on Update`)
+  console.log(data)
+  store.practices = data
+}
+
+const deletePracticeFailure = function (data) {
+  $('#crud-message').text(`Error on Delete`)
+  console.log(data)
+  store.practices = data
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -125,5 +147,9 @@ module.exports = {
   indexPracticesSuccess,
   createPracticeSuccess,
   updatePracticeSuccess,
-  deletePracticeSuccess
+  deletePracticeSuccess,
+  indexPracticesFailure,
+  createPracticeFailure,
+  updatePracticeFailure,
+  deletePracticeFailure
 }

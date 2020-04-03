@@ -1,0 +1,16 @@
+{{#each practices as |practice|}}
+  {{log practice}}
+  <section data-id="{{practice.id}}">
+    <h6>Date:{{practice.date}}</h6>
+    <h6>Start time:{{practice.start_time}}</h6>
+    <h6>Duration:{{practice.duration}}</h6>
+    <h6>Instrument:{{#if practice.instrument}}
+      {{practice.instrument}}
+    {{else}}
+      None
+    {{/if}}</h6>
+    <h6>Practice ID:{{practice.id}}</h6>
+    <!-- <button data-id="{{practice.id}}" type="button" name="Remove" class="btn btn-danger">Remove</button> -->
+  </section>
+
+{{/each}}

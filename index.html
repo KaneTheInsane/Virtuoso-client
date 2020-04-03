@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <h1 class="accent">Musician Practice Tool</h1>
+            <h2 class="accent">Musician Practice Tool</h2>
           </li>
             <!-- Sign up -->
           <li class="nav-item dropdown my-2 my-lg-0">
@@ -76,10 +76,10 @@
       </div>
     </nav>
     <!-- Secondary bootstrap nav bar -->
-    <nav class="navbar navbar-expand">
+    <nav class="secondary navbar navbar-expand hidden">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <!-- Get all practices-->
+          <!-- Index practices-->
           <li>
             <form id="index-prt-btn" class="my-2 my-lg-0">
               <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="All Practices">
@@ -109,7 +109,7 @@
             <div id="update-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
               <form id="update-prt">
                 <legend>Update Details</legend>
-                  <input type="text" name="id" placeholder="Practice ID"><br>
+                  <input type="text" name="updateId" placeholder="Practice ID"><br>
                   <input type="text" name="practice[date]" placeholder="yyyy-mm-dd"><br>
                   <input type="text" name="practice[start_time]" placeholder="xx:xx xm"><br>
                   <input type="text" name="practice[duration]" placeholder="In Hours"><br>
@@ -126,16 +126,19 @@
             <div id="delete-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
               <form id="delete-prt">
                 <legend>Delete ID</legend>
-                  <input type="text" name="id" placeholder="Practice ID"><br>
+                  <input type="text" name="deleteId" placeholder="Practice ID"><br>
                   <input type="submit" value="Delete" class="button"><br>
               </form>
             </div>
           </li>
         </ul>
         <!-- CRUD Messages -->
-        <h2 id="crud-message"></h2>
+        <h3 id="crud-message"></h3>
       </div>
     </nav>
+    <main>
+      <div id="content" class="content"></div>
+    </main>
     <!-- Game Messages -->
     <h2 id='game-state-message' class="hidden">Turn: <span id="game-state-span"></span></h2>
     <h2 id='invalid-move-message'></h2>

@@ -32,4 +32,13 @@ $(() => {
   $('#change-password-drop').on('submit', function () {
     $('#change-password-btn').dropdown('toggle')
   })
+  $('#create-prt-drop').on('submit', function () {
+    $('#create-prt-btn').dropdown('toggle')
+  })
+  $('#update-prt-drop').on('submit', function () {
+    $('#update-prt-btn').dropdown('toggle')
+  })
+  $('#delete-prt-drop').on('submit', function () {
+    $('#delete-prt-btn').dropdown('toggle')
+  })
 })

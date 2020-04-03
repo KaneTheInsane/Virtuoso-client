@@ -30,6 +30,11 @@ h1 {
   text-align: left;
 }
 
+h2 {
+  font-family: $main-font;
+  vertical-align: middle;
+}
+
 footer {
   background: $footer;
   bottom: 0;
@@ -54,6 +59,10 @@ nav {
   display: flex;
   justify-content: center;
   vertical-align: middle;
+}
+
+.secondary {
+  background-color: $secret;
 }
 
 .btn {

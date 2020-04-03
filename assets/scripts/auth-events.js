@@ -42,45 +42,36 @@ const onSignOut = function (event) {
 
 const onIndexPractices = function (event) {
   event.preventDefault()
-  console.log('test')
   api.indexPractices()
     .then(ui.indexPracticesSuccess)
-    .catch(console.log('error'))
+    .catch(ui.indexPracticesFailure)
 }
 
 const onCreatePractice = function (event) {
   event.preventDefault()
-  console.log('test')
   const data = getFormFields(event.target)
   console.log(data)
   api.createPractice(data)
     .then(ui.createPracticeSuccess)
-    .catch(console.log('error'))
+    .catch(ui.createPracticeFailure)
 }
 
 const onUpdatePractice = function (event) {
   event.preventDefault()
-  console.log('test')
   const data = getFormFields(event.target)
-  console.log(data)
-  console.log(data.id)
-  console.log(data.practice)
-  store.updateId = data.id
-  console.log(store.updateId)
+  store.updateId = data.updateId
   api.updatePractice(data)
     .then(ui.updatePracticeSuccess)
-    .catch(console.log('error'))
+    .catch(ui.updatePracticeFailure)
 }
 
 const onDeletePractice = function (event) {
   event.preventDefault()
-  console.log('test')
   const data = getFormFields(event.target)
-  console.log(data)
-  store.deleteId = data.id
+  store.deleteId = data.deleteId
   api.deletePractice(data)
     .then(ui.deletePracticeSuccess)
-    .catch(console.log('error'))
+    .catch(ui.deletePracticeFailure)
 }
 
 module.exports = {
