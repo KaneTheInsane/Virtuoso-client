@@ -3,10 +3,10 @@
   <section data-id="{{practice.id}}" class="practice-item">
     <tr>
       <th scope="row">{{@index}}</th>
+      <td>{{practice.instrument}}</td>
+      <td>{{practice.duration}}hrs</td>
       <td>{{practice.date}}</td>
       <td>{{practice.format_time}}</td>
-      <td>{{practice.duration}}hrs</td>
-      <td>{{practice.instrument}}</td>
       <td><div class="dropdown">
   <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Update
@@ -14,11 +14,11 @@
   <div id="update-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
     <form class="update-prt" data-id="{{practice.id}}">
       <legend>Update Details</legend>
-        <input type="date" name="practice[date]" placeholder="yyyy-mm-dd"><br>
-        <input type="time" name="practice[start_time]" placeholder="xx:xx xm"><br>
-        <input type="number" name="practice[duration]" placeholder="In Hours"><br>
-        <input type="text" name="practice[instrument]" placeholder="Instrument"><br>
-        <input type="submit" value="Update" class="button"><br>
+        <input class="form-input" type="text" name="practice[instrument]" placeholder="Instrument"><br>
+        <input class="form-input" type="date" name="practice[date]" placeholder="yyyy-mm-dd"><br>
+        <input class="form-input" type="time" name="practice[start_time]" placeholder="xx:xx xm"><br>
+        <input class="form-input" type="number" step="0.1" min="0" max="24" name="practice[duration]" placeholder="0.0hrs"><br>
+        <input type="submit" value="Update" class="btn btn-outline-light my-2 my-sm-0"><br>
     </form>
   </div>
 </div></td>

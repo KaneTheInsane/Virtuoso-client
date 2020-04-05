@@ -1,17 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/bootstrap';
 
-$body-bg-color: #859994;
-$accent-color: #6cc4ad;
-$secondary: #000;
-$font-color: #333;
+$body-bg-color: #353a40;
+$accent-color: #262a2f;;
+$secondary: #222;
+$font-color: #fff;
 $error: #f00;
 $success: #0f0;
-$footer: #3a3e6e;
+$footer: #262a2f;
 $main-font: 'Oxanium', cursive;
-$secret: #8c9fc2;
 
 * {
+  color: $font-color;
   justify-content: center;
   text-align: center;
 }
@@ -31,6 +31,7 @@ h1 {
 }
 
 h2 {
+  color: $font-color;
   font-family: $main-font;
   vertical-align: middle;
 }
@@ -46,7 +47,7 @@ footer {
 }
 
 a {
-  color: $accent-color;
+  color: $font-color;
 }
 
 input {
@@ -61,9 +62,17 @@ nav {
   vertical-align: middle;
 }
 
-.secondary {
-  background-color: $secret;
+.form-input {
+  background-color: $body-bg-color;
 }
+
+.dropdown-menu {
+  background-color: $secondary;
+}
+
+// .secondary {
+//   background-color: $secret;
+// }
 
 .btn {
   margin: 10px;
@@ -84,17 +93,17 @@ nav {
   vertical-align: middle;
 }
 
-.box {
-  align-items: center;
-  background-color: $secondary;
-  border: 1px solid $accent-color;
-  color: $font-color;
-  display: flex;
-  font-size: 300%;
-  height: 140px;
-  justify-content: center;
-  width: 100px;
-}
+// .box {
+//   align-items: center;
+//   background-color: $secondary;
+//   border: 1px solid $accent-color;
+//   color: $font-color;
+//   display: flex;
+//   font-size: 300%;
+//   height: 140px;
+//   justify-content: center;
+//   width: 100px;
+// }
 
 .hidden {
   display: none;
