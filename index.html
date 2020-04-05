@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Musician Practice Tool</title>
+    <title>Virtuoso</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Oxanium&amp;=swap" rel="stylesheet">
     <!-- Do not add `link` tags-->
@@ -13,11 +13,12 @@
   </head>
   <body>
     <!-- Main bootstrap nav bar -->
+  <div class="fixed-top double-nav">
     <nav class="navbar navbar-expand">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <h2 class="accent">Musician Practice Tool</h2>
+            <h2 class="accent">Virtuoso</h2>
           </li>
             <!-- Sign up -->
           <li class="nav-item dropdown my-2 my-lg-0">
@@ -82,63 +83,52 @@
           <!-- Index practices-->
           <li>
             <form id="index-prt-btn" class="my-2 my-lg-0">
-              <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="All Practices">
+              <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="List Practices">
             </form>
           </li>
           <!-- Create new practice -->
           <li class="nav-item dropdown my-2 my-sm-0 collapse.show">
             <a class="nav-link btn btn-outline-dark my-2 my-sm-0" href="#" id="create-prt-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              New Practice
+              Log Practice
             </a>
             <div id="create-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
               <form id="create-prt">
                 <legend>Session Details</legend>
-                  <input type="text" name="practice[date]" placeholder="yyyy-mm-dd"><br>
-                  <input type="text" name="practice[start_time]" placeholder="xx:xx xm"><br>
-                  <input type="text" name="practice[duration]" placeholder="In Hours"><br>
+                  <input type="date" name="practice[date]" placeholder="yyyy-mm-dd"><br>
+                  <input type="time" name="practice[start_time]" placeholder="xx:xx xm"><br>
+                  <input type="number" name="practice[duration]" placeholder="In Hours"><br>
                   <input type="text" name="practice[instrument]" placeholder="Instrument"><br>
                   <input type="submit" value="Create" class="button"><br>
                 </form>
             </div>
           </li>
-          <!-- Update practice -->
-          <li class="nav-item dropdown my-2 my-lg-0">
-            <a class="nav-link btn btn-outline-dark my-2 my-sm-0" href="#" id="update-prt-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Update Practice
-            </a>
-            <div id="update-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <form id="update-prt">
-                <legend>Update Details</legend>
-                  <input type="text" name="updateId" placeholder="Practice ID"><br>
-                  <input type="text" name="practice[date]" placeholder="yyyy-mm-dd"><br>
-                  <input type="text" name="practice[start_time]" placeholder="xx:xx xm"><br>
-                  <input type="text" name="practice[duration]" placeholder="In Hours"><br>
-                  <input type="text" name="practice[instrument]" placeholder="Instrument"><br>
-                  <input type="submit" value="Update" class="button"><br>
-              </form>
-            </div>
-          </li>
-          <!-- Delete practice -->
-          <li class="nav-item dropdown my-2 my-lg-0">
-            <a class="nav-link btn btn-outline-dark my-2 my-sm-0" href="#" id="delete-prt-btn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Delete Practice
-            </a>
-            <div id="delete-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <form id="delete-prt">
-                <legend>Delete ID</legend>
-                  <input type="text" name="deleteId" placeholder="Practice ID"><br>
-                  <input type="submit" value="Delete" class="button"><br>
-              </form>
-            </div>
+          <!-- Practice Stats -->
+          <li>
+            <form id="prt-stats-btn" class="form-inline my-2 my-lg-0">
+              <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="Practice Stats">
+            </form>
           </li>
         </ul>
         <!-- CRUD Messages -->
         <h3 id="crud-message"></h3>
       </div>
     </nav>
-    <main>
-      <div id="content" class="content"></div>
-    </main>
+  </div>
+      <table class="table table-striped table-dark hidden">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Instrument</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody id="content" class="content">
+        </tbody>
+      </table>
     <!-- Game Messages -->
     <h2 id='game-state-message' class="hidden">Turn: <span id="game-state-span"></span></h2>
     <h2 id='invalid-move-message'></h2>

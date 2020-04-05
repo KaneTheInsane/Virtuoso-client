@@ -1,15 +1,29 @@
 {{#each practices as |practice|}}
   {{log practice}}
-  <section data-id="{{practice.id}}">
-    <h6>Date:{{practice.date}}</h6>
-    <h6>Start time:{{practice.start_time}}</h6>
-    <h6>Duration:{{practice.duration}}</h6>
-    <h6>Instrument:{{#if practice.instrument}}
-      {{practice.instrument}}
-    {{else}}
-      None
-    {{/if}}</h6>
-    <h6>Practice ID:{{practice.id}}</h6>
+  <section data-id="{{practice.id}}" class="practice-item">
+    <tr>
+      <th scope="row">{{@index}}</th>
+      <td>{{practice.date}}</td>
+      <td>{{practice.format_time}}</td>
+      <td>{{practice.duration}}hrs</td>
+      <td>{{practice.instrument}}</td>
+      <td><div class="dropdown">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Update
+  </button>
+  <div id="update-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <form class="update-prt" data-id="{{practice.id}}">
+      <legend>Update Details</legend>
+        <input type="date" name="practice[date]" placeholder="yyyy-mm-dd"><br>
+        <input type="time" name="practice[start_time]" placeholder="xx:xx xm"><br>
+        <input type="number" name="practice[duration]" placeholder="In Hours"><br>
+        <input type="text" name="practice[instrument]" placeholder="Instrument"><br>
+        <input type="submit" value="Update" class="button"><br>
+    </form>
+  </div>
+</div></td>
+      <td><button data-id="{{practice.id}}" type="button" name="Delete" class="btn btn-outline-danger delete-button">Remove</button></td>
+    </tr>
     <!-- <button data-id="{{practice.id}}" type="button" name="Remove" class="btn btn-danger">Remove</button> -->
   </section>
 

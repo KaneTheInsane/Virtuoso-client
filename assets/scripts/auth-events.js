@@ -60,7 +60,8 @@ const onUpdatePractice = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
   store.updateId = data.updateId
-  api.updatePractice(data)
+  console.log($(event.target).data('id'))
+  api.updatePractice(data, ($(event.target).data('id')))
     .then(ui.updatePracticeSuccess)
     .catch(ui.updatePracticeFailure)
 }
@@ -69,7 +70,8 @@ const onDeletePractice = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
   store.deleteId = data.deleteId
-  api.deletePractice(data)
+  console.log($(event.target).data('id'))
+  api.deletePractice($(event.target).data('id'))
     .then(ui.deletePracticeSuccess)
     .catch(ui.deletePracticeFailure)
 }

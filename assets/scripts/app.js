@@ -16,8 +16,8 @@ $(() => {
   // User specific actions
   $('#index-prt-btn').on('submit', authEvents.onIndexPractices)
   $('#create-prt').on('submit', authEvents.onCreatePractice)
-  $('#update-prt').on('submit', authEvents.onUpdatePractice)
-  $('#delete-prt').on('submit', authEvents.onDeletePractice)
+  $('.content').on('submit', '.update-prt', authEvents.onUpdatePractice)
+  $('.content').on('click', '.delete-button', authEvents.onDeletePractice)
 
   // Dropdown menu closed after submitting
   $('#sign-in-drop').on('submit', function () {

@@ -62,9 +62,9 @@ const createPractice = function (data) {
   })
 }
 
-const updatePractice = function (data) {
+const updatePractice = function (data, id) {
   return $.ajax({
-    url: config.apiUrl + '/practices/' + store.updateId,
+    url: config.apiUrl + '/practices/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -75,7 +75,7 @@ const updatePractice = function (data) {
 
 const deletePractice = function (data) {
   return $.ajax({
-    url: config.apiUrl + '/practices/' + store.deleteId,
+    url: config.apiUrl + '/practices/' + data,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token

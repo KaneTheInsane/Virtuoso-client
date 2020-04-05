@@ -70,6 +70,7 @@ const signOutSuccess = function (data) {
   $('#change-password-btn').addClass('hidden')
   $('#stats-btn').addClass('hidden')
   $('#sign-out-btn').addClass('hidden')
+  $('.table').addClass('hidden')
   $('.box').text('')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
@@ -86,6 +87,7 @@ const signOutFailure = function () {
 }
 
 const indexPracticesSuccess = function (data) {
+  $('.table').removeClass('hidden')
   const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
   $('.content').html(indexPracticesHtml)
   $('#crud-message').text('List of Practices')
@@ -100,15 +102,16 @@ const createPracticeSuccess = function (data) {
 }
 
 const updatePracticeSuccess = function (data) {
-  $('#crud-message').text(`Updated Practice ${store.updateId}!`)
+  $('#crud-message').text(`Updated Practice!`)
   console.log(data)
   store.practices = data
 }
 
 const deletePracticeSuccess = function (data) {
-  $('#crud-message').text(`Deleted Practice ${store.deleteId}!`)
   console.log(data)
-  store.practices = data
+  // const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
+  // $('.content').html(indexPracticesHtml)
+  $('#crud-message').text(`Deleted Practice!`)
 }
 
 const indexPracticesFailure = function (data) {
@@ -131,8 +134,6 @@ const updatePracticeFailure = function (data) {
 
 const deletePracticeFailure = function (data) {
   $('#crud-message').text(`Error on Delete`)
-  console.log(data)
-  store.practices = data
 }
 
 module.exports = {
