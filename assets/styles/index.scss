@@ -5,13 +5,14 @@ $body-bg-color: #353a40;
 $accent-color: #262a2f;;
 $secondary: #222;
 $font-color: #fff;
-$error: #f00;
-$success: #0f0;
+$error: #b50415;
+$success: #2e4a12;
 $footer: #262a2f;
 $main-font: 'Oxanium', cursive;
 
 * {
   color: $font-color;
+  font-family: $main-font;
 }
 
 body {
@@ -79,19 +80,18 @@ nav {
 .modal-footer {
   border-top: 0 none;
 }
-// .secondary {
-//   background-color: $secret;
-// }
-
 
 .table {
   margin-top: 130px;
 }
-// .container {
-//   margin-bottom: 50px;
-//   margin-top: 50px;
-//   max-width: 420px;
-// }
+
+.warning-message {
+  align-items: center;
+  color: $error;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
 
 .nav-item {
   align-items: center;

@@ -78,6 +78,7 @@ const signOutSuccess = function (data) {
   $('form input[type="password"]').val('')
   $('.secondary').addClass('hidden')
   $('.content').html('')
+  $('#warning-message').text('')
 }
 
 const signOutFailure = function () {
@@ -95,6 +96,7 @@ const indexPracticesSuccess = function (data) {
   const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
   $('.content').html(indexPracticesHtml)
   $('#crud-message').text('List of Practices')
+  $('#warning-message').text('')
 }
 
 const getPracticeStatsSuccess = function (data) {
@@ -103,11 +105,12 @@ const getPracticeStatsSuccess = function (data) {
     return prev + cur.duration
   }, 0)
   $('#session-count-span').text(singleInstrumentArray.length)
-  $('#time-count-span').text(totalTime)
+  $('#time-count-span').text(Math.round(totalTime * 10) / 10)
 }
 
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
+  $('#warning-message').text('')
   store.practices = data
 }
 
@@ -144,6 +147,7 @@ const onPracticeStatsButton = function (event) {
   $('.table').addClass('hidden')
   $('#log-prt-menu').addClass('hidden')
   $('#prt-stats-menu').removeClass('hidden')
+  $('#warning-message').text('')
 }
 
 const onLogPracticeButton = function (event) {
@@ -152,6 +156,7 @@ const onLogPracticeButton = function (event) {
   $('.table').addClass('hidden')
   $('#prt-stats-menu').addClass('hidden')
   $('#log-prt-menu').removeClass('hidden')
+  $('#warning-message').text('')
 }
 
 module.exports = {

@@ -8,15 +8,11 @@
       <td>{{practice.date}}</td>
       <td>{{practice.format_time}}</td>
       <td>
-        <!-- <div class="dropdown"> -->
-          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Update
-          </button> -->
           <button data-id="{{practice.id}}" type="button" class="btn btn-outline-success my-2 my-sm-0 update-modal" data-toggle="modal" data-target="#updateModal{{@index}}">
             Update
           </button>
-
-          <div class="modal fade" id="updateModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- Modal -->
+          <div data-id="{{practice.id}}" class="modal fade" id="updateModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -44,27 +40,12 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary cancel-update" data-dismiss="modal">Cancel</button>
-                  <button data-id="{{practice.id}}" type="button" class="btn btn-success update-button">Update</button>
+                  <button data-id="{{practice.id}}" type="button" class="btn btn-success update-button" data-dismiss="modal">Update</button>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
-          <!-- <div id="update-prt-drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <form class="update-prt" data-id="{{practice.id}}">
-              <legend>Update Details</legend>
-              <input class="form-input" type="text" name="practice[instrument]" placeholder="Instrument"><br>
-              <input class="form-input" type="date" name="practice[date]" placeholder="yyyy-mm-dd"><br>
-              <input class="form-input" type="time" name="practice[start_time]" placeholder="xx:xx xm"><br>
-              <input class="form-input" type="number" step="0.1" min="0" max="24" name="practice[duration]" placeholder="0.0hrs"><br>
-              <input type="submit" value="Update" class="btn btn-outline-light my-2 my-sm-0"><br>
-            </form>
-          </div>
-        </div> -->
-      </td>
+        </td>
       <td>
         <button data-id="{{practice.id}}" type="button" class="btn btn-outline-danger delete-modal" data-toggle="modal" data-target="#deleteModal{{@index}}">
           Delete

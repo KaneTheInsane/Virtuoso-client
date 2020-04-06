@@ -62,6 +62,17 @@ const createPractice = function (data) {
   })
 }
 
+const showPractice = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/practices/' + store.updateItemId,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 const updatePractice = function (data, id) {
   return $.ajax({
     url: config.apiUrl + '/practices/' + id,
@@ -91,5 +102,6 @@ module.exports = {
   indexPractices,
   createPractice,
   updatePractice,
-  deletePractice
+  deletePractice,
+  showPractice
 }
