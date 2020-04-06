@@ -5,9 +5,10 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+// Auth Events
+
 const onSignUp = function (event) {
   event.preventDefault()
-  // console.log('Signing up')
   const data = getFormFields(event.target)
   api.signUp(data)
     .then(ui.signUpSuccess)
@@ -16,7 +17,6 @@ const onSignUp = function (event) {
 
 const onSignIn = function (event) {
   event.preventDefault()
-  // console.log('Signing in')
   const data = getFormFields(event.target)
   api.signIn(data)
     .then(ui.signInSuccess)
@@ -25,7 +25,6 @@ const onSignIn = function (event) {
 
 const onChangePassword = function (event) {
   event.preventDefault()
-  // console.log('Change password')
   const data = getFormFields(event.target)
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
@@ -34,47 +33,18 @@ const onChangePassword = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault()
-  // console.log('Sign out')
   api.signOut()
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
 }
+
+// Get events
 
 const onIndexPractices = function (event) {
   event.preventDefault()
   api.indexPractices()
     .then(ui.indexPracticesSuccess)
     .catch(ui.indexPracticesFailure)
-}
-
-const onCreatePractice = function (event) {
-  event.preventDefault()
-  const data = getFormFields(event.target)
-  console.log(data)
-  api.createPractice(data)
-    .then(ui.createPracticeSuccess)
-    .catch(ui.createPracticeFailure)
-}
-
-const onUpdatePractice = function (event) {
-  event.preventDefault()
-  const data = getFormFields(event.target)
-  store.updateId = data.updateId
-  console.log($(event.target).data('id'))
-  api.updatePractice(data, ($(event.target).data('id')))
-    .then(ui.updatePracticeSuccess)
-    .catch(ui.updatePracticeFailure)
-}
-
-const onDeletePractice = function (event) {
-  event.preventDefault()
-  // console.log($(event.target))
-  // store.itemId = $(event.target).data('id')
-  // console.log(store.itemId)
-  $(`.practice-item[data-id=${store.itemId}]`).hide()
-  api.deletePractice(store.itemId)
-    .then(ui.deletePracticeSuccess)
-    .catch(ui.deletePracticeFailure)
 }
 
 const onGetPracticeStats = function (event) {
@@ -84,6 +54,55 @@ const onGetPracticeStats = function (event) {
   api.indexPractices()
     .then(ui.getPracticeStatsSuccess)
     .catch(ui.getPracticeStatsFailure)
+}
+
+// Create event
+
+const onCreatePractice = function (event) {
+  event.preventDefault()
+  console.log(event)
+  const data = getFormFields(event.target)
+  api.createPractice(data)
+    .then(ui.createPracticeSuccess)
+    .catch(ui.createPracticeFailure)
+}
+
+// Update Events
+
+const onUpdatePractice = function (event) {
+  event.preventDefault()
+  // console.log(store.updateItemId)
+  console.log(($(`.update-prt[data-id=${store.updateItemId}]`)).target)
+  const data = getFormFields(($(`.update-prt[data-id=${store.updateItemId}]`)).target)
+  console.log(data)
+  // console.log($(event.target).data('id'))
+  api.updatePractice(data, store.updateItemId)
+    .then(ui.updatePracticeSuccess)
+    .catch(ui.updatePracticeFailure)
+}
+
+const cancelUpdate = function (event) {
+  event.preventDefault()
+  store.updateItemId = undefined
+}
+
+const selectUpdate = function (event) {
+  event.preventDefault()
+  store.updateItemId = $(event.target).data('id')
+  console.log(store.updateItemId)
+}
+
+// Delete events
+
+const onDeletePractice = function (event) {
+  event.preventDefault()
+  // console.log($(event.target))
+  store.itemId = $(event.target).data('id')
+  // console.log(store.itemId)
+  $(`.practice-item[data-id=${store.itemId}]`).hide()
+  api.deletePractice(store.itemId)
+    .then(ui.deletePracticeSuccess)
+    .catch(ui.deletePracticeFailure)
 }
 
 const cancelDelete = function (event) {
@@ -108,5 +127,7 @@ module.exports = {
   onDeletePractice,
   onGetPracticeStats,
   cancelDelete,
-  selectDelete
+  selectDelete,
+  cancelUpdate,
+  selectUpdate
 }

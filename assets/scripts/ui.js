@@ -108,13 +108,11 @@ const getPracticeStatsSuccess = function (data) {
 
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
-  console.log(data)
   store.practices = data
 }
 
 const updatePracticeSuccess = function (data) {
   $('#crud-message').text(`Updated Practice!`)
-  console.log(data)
   store.practices = data
 }
 
@@ -126,20 +124,14 @@ const deletePracticeSuccess = function (data) {
 
 const indexPracticesFailure = function (data) {
   $('#crud-message').text('Failed to Find List')
-  console.log(data)
-  store.practices = data
 }
 
 const createPracticeFailure = function (data) {
   $('#crud-message').text('Error on Create')
-  console.log(data)
-  store.practices = data
 }
 
 const updatePracticeFailure = function (data) {
   $('#crud-message').text(`Error on Update`)
-  console.log(data)
-  store.practices = data
 }
 
 const deletePracticeFailure = function (data) {

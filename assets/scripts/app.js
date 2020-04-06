@@ -22,12 +22,16 @@ $(() => {
   $('#index-prt-btn').on('submit', authEvents.onIndexPractices)
   $('#get-prt-stats').on('submit', authEvents.onGetPracticeStats)
   $('#create-prt').on('submit', authEvents.onCreatePractice)
-  $('.content').on('submit', '.update-prt', authEvents.onUpdatePractice)
 
   // Delete actions
   $('.content').on('click', '.delete-button', authEvents.onDeletePractice)
   $('.content').on('click', '.cancel-delete', authEvents.cancelDelete)
   $('.content').on('click', '.delete-modal', authEvents.selectDelete)
+
+  // Update actions
+  $('.content').on('click', '.update-button', authEvents.onUpdatePractice)
+  $('.content').on('click', '.cancel-update', authEvents.cancelUpdate)
+  $('.content').on('click', '.update-modal', authEvents.selectUpdate)
 
   // Dropdown menu closed after submitting
   $('#sign-in-drop').on('submit', function () {
