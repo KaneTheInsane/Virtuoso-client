@@ -68,12 +68,33 @@ const onUpdatePractice = function (event) {
 
 const onDeletePractice = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
-  store.deleteId = data.deleteId
-  console.log($(event.target).data('id'))
-  api.deletePractice($(event.target).data('id'))
+  // console.log($(event.target))
+  // store.itemId = $(event.target).data('id')
+  // console.log(store.itemId)
+  $(`.practice-item[data-id=${store.itemId}]`).hide()
+  api.deletePractice(store.itemId)
     .then(ui.deletePracticeSuccess)
     .catch(ui.deletePracticeFailure)
+}
+
+const onGetPracticeStats = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  store.instrumentStat = data.instrument
+  api.indexPractices()
+    .then(ui.getPracticeStatsSuccess)
+    .catch(ui.getPracticeStatsFailure)
+}
+
+const cancelDelete = function (event) {
+  event.preventDefault()
+  store.itemId = undefined
+}
+
+const selectDelete = function (event) {
+  event.preventDefault()
+  store.itemId = $(event.target).data('id')
+  console.log(store.itemId)
 }
 
 module.exports = {
@@ -84,5 +105,8 @@ module.exports = {
   onIndexPractices,
   onCreatePractice,
   onUpdatePractice,
-  onDeletePractice
+  onDeletePractice,
+  onGetPracticeStats,
+  cancelDelete,
+  selectDelete
 }

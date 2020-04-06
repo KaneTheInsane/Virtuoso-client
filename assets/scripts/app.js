@@ -3,6 +3,7 @@
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
 const authEvents = require('./auth-events.js')
+const uiEvents = require('./ui')
 // use require without a reference to ensure a file is bundled
 // require('./example')
 
@@ -13,11 +14,20 @@ $(() => {
   $('#change-password').on('submit', authEvents.onChangePassword)
   $('#sign-out-btn').on('submit', authEvents.onSignOut)
 
-  // User specific actions
+  // Pure UI actions
+  $('#log-prt-btn').on('click', uiEvents.onLogPracticeButton)
+  $('#prt-stats-btn').on('click', uiEvents.onPracticeStatsButton)
+
+  // User actions
   $('#index-prt-btn').on('submit', authEvents.onIndexPractices)
+  $('#get-prt-stats').on('submit', authEvents.onGetPracticeStats)
   $('#create-prt').on('submit', authEvents.onCreatePractice)
   $('.content').on('submit', '.update-prt', authEvents.onUpdatePractice)
+
+  // Delete actions
   $('.content').on('click', '.delete-button', authEvents.onDeletePractice)
+  $('.content').on('click', '.cancel-delete', authEvents.cancelDelete)
+  $('.content').on('click', '.delete-modal', authEvents.selectDelete)
 
   // Dropdown menu closed after submitting
   $('#sign-in-drop').on('submit', function () {

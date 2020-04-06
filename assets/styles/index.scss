@@ -12,8 +12,6 @@ $main-font: 'Oxanium', cursive;
 
 * {
   color: $font-color;
-  justify-content: center;
-  text-align: center;
 }
 
 body {
@@ -62,6 +60,10 @@ nav {
   vertical-align: middle;
 }
 
+.modal-content {
+  background-color: $secondary;
+}
+
 .form-input {
   background-color: $body-bg-color;
 }
@@ -70,13 +72,17 @@ nav {
   background-color: $secondary;
 }
 
+.modal-header {
+  border-bottom: 0 none;
+}
+
+.modal-footer {
+  border-top: 0 none;
+}
 // .secondary {
 //   background-color: $secret;
 // }
 
-.btn {
-  margin: 10px;
-}
 
 .table {
   margin-top: 130px;
@@ -93,17 +99,18 @@ nav {
   vertical-align: middle;
 }
 
-// .box {
-//   align-items: center;
-//   background-color: $secondary;
-//   border: 1px solid $accent-color;
-//   color: $font-color;
-//   display: flex;
-//   font-size: 300%;
-//   height: 140px;
-//   justify-content: center;
-//   width: 100px;
-// }
+.container {
+  // align-items: center;
+  background-color: $secondary;
+  border: 1px solid $accent-color;
+  color: $font-color;
+  // display: flex;
+  font-size: 150%;
+  height: 400px;
+  // justify-content: center;
+  margin-top: 200px;
+  width: 600px;
+}
 
 .hidden {
   display: none;

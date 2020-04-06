@@ -71,6 +71,8 @@ const signOutSuccess = function (data) {
   $('#stats-btn').addClass('hidden')
   $('#sign-out-btn').addClass('hidden')
   $('.table').addClass('hidden')
+  $('#log-prt-menu').addClass('hidden')
+  $('#prt-stats-menu').addClass('hidden')
   $('.box').text('')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
@@ -87,12 +89,21 @@ const signOutFailure = function () {
 }
 
 const indexPracticesSuccess = function (data) {
+  $('#log-prt-menu').addClass('hidden')
+  $('#prt-stats-menu').addClass('hidden')
   $('.table').removeClass('hidden')
   const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
   $('.content').html(indexPracticesHtml)
   $('#crud-message').text('List of Practices')
-  console.log(data)
-  store.practices = data
+}
+
+const getPracticeStatsSuccess = function (data) {
+  const singleInstrumentArray = data.practices.filter(x => x.instrument === store.instrumentStat)
+  const totalTime = singleInstrumentArray.reduce(function (prev, cur) {
+    return prev + cur.duration
+  }, 0)
+  $('#session-count-span').text(singleInstrumentArray.length)
+  $('#time-count-span').text(totalTime)
 }
 
 const createPracticeSuccess = function (data) {
@@ -108,7 +119,6 @@ const updatePracticeSuccess = function (data) {
 }
 
 const deletePracticeSuccess = function (data) {
-  console.log(data)
   // const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
   // $('.content').html(indexPracticesHtml)
   $('#crud-message').text(`Deleted Practice!`)
@@ -136,6 +146,22 @@ const deletePracticeFailure = function (data) {
   $('#crud-message').text(`Error on Delete`)
 }
 
+const onPracticeStatsButton = function (event) {
+  event.preventDefault()
+  $('#crud-message').text('Practice Statistics')
+  $('.table').addClass('hidden')
+  $('#log-prt-menu').addClass('hidden')
+  $('#prt-stats-menu').removeClass('hidden')
+}
+
+const onLogPracticeButton = function (event) {
+  event.preventDefault()
+  $('#crud-message').text('Log a New Practice')
+  $('.table').addClass('hidden')
+  $('#prt-stats-menu').addClass('hidden')
+  $('#log-prt-menu').removeClass('hidden')
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -152,5 +178,8 @@ module.exports = {
   indexPracticesFailure,
   createPracticeFailure,
   updatePracticeFailure,
-  deletePracticeFailure
+  deletePracticeFailure,
+  onPracticeStatsButton,
+  onLogPracticeButton,
+  getPracticeStatsSuccess
 }
