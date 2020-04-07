@@ -9,7 +9,7 @@
       <td>{{practice.format_time}}</td>
       <td>
           <button data-id="{{practice.id}}" type="button" class="btn btn-outline-success my-2 my-sm-0 update-modal" data-toggle="modal" data-target="#updateModal{{@index}}">
-            Update
+            Edit
           </button>
           <!-- Modal -->
           <div data-id="{{practice.id}}" class="modal fade" id="updateModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary cancel-update" data-dismiss="modal">Cancel</button>
-                  <button data-id="{{practice.id}}" type="button" class="btn btn-success update-button" data-dismiss="modal">Update</button>
+                  <button data-id="{{practice.id}}" type="button" class="btn btn-success update-button" data-dismiss="modal">Confirm</button>
                 </div>
               </div>
             </div>

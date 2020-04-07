@@ -76,6 +76,7 @@ const signOutSuccess = function (data) {
   $('.box').text('')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
+  $('form input[class="form-input"]').val('')
   $('.secondary').addClass('hidden')
   $('.content').html('')
   $('#warning-message').text('')
@@ -111,11 +112,13 @@ const getPracticeStatsSuccess = function (data) {
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
   $('#warning-message').text('')
+  $('form input[class="form-input"]').val('')
   store.practices = data
 }
 
 const updatePracticeSuccess = function (data) {
   $('#crud-message').text(`Updated Practice!`)
+  $('form input[class="form-input"]').val('')
   store.practices = data
 }
 
