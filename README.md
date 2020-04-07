@@ -36,7 +36,6 @@ Additionally focusing on the MVP was important. I was able to finish that very q
 **Things to add:**
 
   To do on 04/07/20:
-  * check requirements to make sure to meet MVP
   * Make logo
   * space out buttons and add margins to forms
   * Make instrument case insesitive
