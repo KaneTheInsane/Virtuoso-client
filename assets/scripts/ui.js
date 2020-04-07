@@ -1,7 +1,7 @@
 'use strict'
 
 const indexPracticesTemplate = require('./templates/practice-listing.handlebars')
-
+const api = require('./api')
 const store = require('./store')
 
 const signUpSuccess = function (data) {
@@ -112,20 +112,31 @@ const getPracticeStatsSuccess = function (data) {
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
   $('#warning-message').text('')
-  $('form input[class="form-input"]').val('')
-  store.practices = data
+  // $('form input[class="form-input"]').val('')
 }
 
 const updatePracticeSuccess = function (data) {
   $('#crud-message').text(`Updated Practice!`)
   $('form input[class="form-input"]').val('')
-  store.practices = data
+  api.indexPractices()
+    .then(refreshListSuccess)
+    .catch(refreshListFailure)
 }
 
 const deletePracticeSuccess = function (data) {
-  // const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
-  // $('.content').html(indexPracticesHtml)
   $('#crud-message').text(`Deleted Practice!`)
+  api.indexPractices()
+    .then(refreshListSuccess)
+    .catch(refreshListFailure)
+}
+
+const refreshListSuccess = function (data) {
+  const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
+  $('.content').html(indexPracticesHtml)
+}
+
+const refreshListFailure = function (data) {
+  $('#crud-message').text(`Failed to Update list`)
 }
 
 const indexPracticesFailure = function (data) {

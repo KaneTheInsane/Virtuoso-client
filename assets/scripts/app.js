@@ -24,13 +24,13 @@ $(() => {
   $('#create-prt').on('submit', authEvents.onCreatePractice)
 
   // Delete actions
-  $('.content').on('click', '.delete-button', authEvents.onDeletePractice)
-  $('.content').on('click', '.cancel-delete', authEvents.cancelDelete)
+  $('.delete-button').on('click', authEvents.onDeletePractice)
+  $('.cancel-delete').on('click', authEvents.cancelDelete)
   $('.content').on('click', '.delete-modal', authEvents.selectDelete)
 
   // Update actions
-  $('.content').on('click', '.update-button', authEvents.onUpdatePractice)
-  $('.content').on('click', '.cancel-update', authEvents.cancelUpdate)
+  $('.update-button').on('click', authEvents.onUpdatePractice)
+  $('.cancel-update').on('click', authEvents.cancelUpdate)
   $('.content').on('click', '.update-modal', authEvents.selectUpdate)
 
   // Dropdown menu closed after submitting

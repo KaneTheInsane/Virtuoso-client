@@ -60,10 +60,8 @@ const onGetPracticeStats = function (event) {
 
 const onCreatePractice = function (event) {
   event.preventDefault()
-  // console.log(event.target)
   const data = getFormFields(event.target)
   const practiceValueArray = Object.values(data.practice)
-  console.log(practiceValueArray.some(x => x === ''))
   if (practiceValueArray.some(x => x === '') === true) {
     $('#warning-message').text('Please fill out all forms')
   } else {
@@ -75,40 +73,32 @@ const onCreatePractice = function (event) {
 
 // Update Events
 
+const onUpdatePractice = function (event) {
+  event.preventDefault()
+  console.log($('.update-prt')[0])
+  store.updateData = getFormFields($('.update-prt')[0])
+  api.showPractice()
+    .then(showPracticeSuccess)
+    .catch(ui.updatePracticeFailure)
+}
 const showPracticeSuccess = function (data) {
   const currentValueArray = Object.values(data.practice).slice(1, 5)
   const updateValueArray = Object.values(store.updateData.practice)
   const instrument = currentValueArray.pop()
   currentValueArray.unshift(instrument)
-  console.log(currentValueArray)
-  console.log(updateValueArray)
   for (let i = 0; i <= updateValueArray.length; i++) {
     if (updateValueArray[i] === '') {
       updateValueArray[i] = currentValueArray[i]
     }
   }
-  console.log(currentValueArray)
-  console.log(updateValueArray)
   const practiceData = { practice: {
     date: updateValueArray[1],
     start_time: updateValueArray[2],
     duration: updateValueArray[3],
     instrument: updateValueArray[0]
   }}
-  console.log(practiceData)
   api.updatePractice(practiceData, store.updateItemId)
     .then(ui.updatePracticeSuccess)
-    .catch(ui.updatePracticeFailure)
-}
-
-const onUpdatePractice = function (event) {
-  event.preventDefault()
-  // console.log(store.updateItemId)
-  // console.log($(`.update-prt[data-id=${store.updateItemId}]`))
-  // console.log($(`.update-prt[data-id=${store.updateItemId}]`)[0])
-  store.updateData = getFormFields($(`.update-prt[data-id=${store.updateItemId}]`)[0])
-  api.showPractice()
-    .then(showPracticeSuccess)
     .catch(ui.updatePracticeFailure)
 }
 
@@ -127,10 +117,7 @@ const selectUpdate = function (event) {
 
 const onDeletePractice = function (event) {
   event.preventDefault()
-  // console.log($(event.target))
-  store.itemId = $(event.target).data('id')
-  // console.log(store.itemId)
-  $(`.practice-item[data-id=${store.itemId}]`).hide()
+  // store.itemId = $(event.target).data('id')
   api.deletePractice(store.itemId)
     .then(ui.deletePracticeSuccess)
     .catch(ui.deletePracticeFailure)

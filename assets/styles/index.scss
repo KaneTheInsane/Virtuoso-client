@@ -25,7 +25,6 @@ h1 {
   background-color: $accent-color;
   color: $font-color;
   font-family: $main-font;
-  padding: 10px;
   text-align: left;
 }
 
@@ -59,6 +58,11 @@ nav {
   display: flex;
   justify-content: center;
   vertical-align: middle;
+}
+
+.logo {
+  font-family: 'Tangerine', cursive;
+  font-size: 400%;
 }
 
 .modal-content {
