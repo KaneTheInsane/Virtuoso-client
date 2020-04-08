@@ -34,21 +34,9 @@ Additionally focusing on the MVP was important. I was able to finish that very q
 ### Some problems left to solve
 
 **Things to add:**
-
-  To do on 04/07/20:
-  * Make logo
-  * space out buttons and add margins to forms
-  * Make instrument case insesitive
-  * Delete and update refresh table
-  * add dropdown selector for instrument stats
-  * add account dropdown for change password modal and logout button
-  * create sign in/sign up home page
-  * add background image
-
-
   * Metronome
   * or total practice time on a day
   * show calender with all days practiced
   * add exercise to practices (Practices have_many Exercises)
-  * progress bar to master
+  * progress bar to reach master
   * have search funtion for certain dates, instruments, start time, or duration

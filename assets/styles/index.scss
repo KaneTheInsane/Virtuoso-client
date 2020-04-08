@@ -16,28 +16,33 @@ $main-font: 'Oxanium', cursive;
 }
 
 body {
+  background-attachment: fixed;
   background-color: $body-bg-color;
+  background-image: url('https://imgur.com/04pYvqu.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   clear: both;
   margin-bottom: 100px;
 }
 
 h1 {
-  background-color: $accent-color;
   color: $font-color;
   font-family: $main-font;
-  text-align: left;
 }
 
 h2 {
   color: $font-color;
   font-family: $main-font;
-  vertical-align: middle;
+}
+
+h3 {
+  padding-left: 25px;
 }
 
 footer {
   background: $footer;
   bottom: 0;
-  height: 70px;
+  height: 60px;
   justify-content: center;
   position: fixed;
   text-align: center;
@@ -53,16 +58,33 @@ input {
 }
 
 nav {
-  align-items: center;
   background-color: $accent-color;
   display: flex;
-  justify-content: center;
-  vertical-align: middle;
+}
+
+.selector {
+  background-color: $secondary;
+  opacity: 1;
+}
+
+.populate {
+  padding-bottom: 10px;
+  padding-top: 15px;
 }
 
 .logo {
   font-family: 'Tangerine', cursive;
   font-size: 400%;
+}
+
+.logo2 {
+  font-family: 'Tangerine', cursive;
+  font-size: 600%;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
 }
 
 .modal-content {
@@ -86,7 +108,7 @@ nav {
 }
 
 .table {
-  margin-top: 130px;
+  margin-top: 100px;
 }
 
 .warning-message {
@@ -97,23 +119,62 @@ nav {
   margin-top: 5px;
 }
 
-.nav-item {
+.session-state-message {
   align-items: center;
-  margin-bottom: 10px;
-  vertical-align: middle;
+  color: $error;
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+}
+
+.smaller {
+  max-height: 80px;
+}
+
+.entry-button {
+  font-size: 120%;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.secondary {
+  display: flex;
+}
+
+.link-2 {
+  font-size: 60%;
+}
+
+.account {
+  margin-left: auto;
 }
 
 .container {
-  // align-items: center;
+  align-items: center;
   background-color: $secondary;
   border: 1px solid $accent-color;
   color: $font-color;
   // display: flex;
   font-size: 150%;
   height: 400px;
-  // justify-content: center;
+  justify-content: center;
   margin-top: 200px;
   width: 600px;
+}
+
+.entry-container {
+  align-items: center;
+  background-image: url('https://imgur.com/zZiwVXp.jpg');
+  background-color: $secondary;
+  border: 1px solid $accent-color;
+  color: $font-color;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 150%;
+  height: 400px;
+  justify-content: center;
+  margin-top: 200px;
+  width: 400px;
 }
 
 .hidden {
@@ -121,5 +182,5 @@ nav {
 }
 
 .button {
-  margin: 8px;
+  padding: 8px;
 }

@@ -4,12 +4,13 @@ const getFormFields = require('../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
+// const updateInfoTemplate = require('./templates/update-info.handlebars')
 
 // Auth Events
 
 const onSignUp = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
+  const data = getFormFields($('#sign-in')[0])
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
@@ -17,7 +18,7 @@ const onSignUp = function (event) {
 
 const onSignIn = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
+  const data = getFormFields($('#sign-in')[0])
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
@@ -25,7 +26,7 @@ const onSignIn = function (event) {
 
 const onChangePassword = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
+  const data = getFormFields($('#change-password')[0])
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
@@ -49,11 +50,17 @@ const onIndexPractices = function (event) {
 
 const onGetPracticeStats = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
-  store.instrumentStat = data.instrument
-  api.indexPractices()
-    .then(ui.getPracticeStatsSuccess)
-    .catch(ui.getPracticeStatsFailure)
+  store.instrumentStat = $('#inputGroupSelect').val()
+  if (store.instrumentStat === null || store.instrumentStat === 'Choose...') {
+    $('#stat-message').text('No Instrument Selected')
+    $('#session-count-span').text('')
+    $('#time-count-span').text('')
+  } else {
+    $('#stat-message').text('')
+    api.indexPractices()
+      .then(ui.getPracticeStatsSuccess)
+      .catch(ui.getPracticeStatsFailure)
+  }
 }
 
 // Create event
@@ -61,10 +68,12 @@ const onGetPracticeStats = function (event) {
 const onCreatePractice = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
+  const instrument = data.practice.instrument
   const practiceValueArray = Object.values(data.practice)
   if (practiceValueArray.some(x => x === '') === true) {
     $('#warning-message').text('Please fill out all forms')
   } else {
+    data.practice.instrument = instrument.charAt(0).toUpperCase() + instrument.slice(1)
     api.createPractice(data)
       .then(ui.createPracticeSuccess)
       .catch(ui.createPracticeFailure)
@@ -75,13 +84,12 @@ const onCreatePractice = function (event) {
 
 const onUpdatePractice = function (event) {
   event.preventDefault()
-  console.log($('.update-prt')[0])
   store.updateData = getFormFields($('.update-prt')[0])
   api.showPractice()
-    .then(showPracticeSuccess)
+    .then(checkPracticeForEmpty)
     .catch(ui.updatePracticeFailure)
 }
-const showPracticeSuccess = function (data) {
+const checkPracticeForEmpty = function (data) {
   const currentValueArray = Object.values(data.practice).slice(1, 5)
   const updateValueArray = Object.values(store.updateData.practice)
   const instrument = currentValueArray.pop()
@@ -110,7 +118,16 @@ const cancelUpdate = function (event) {
 const selectUpdate = function (event) {
   event.preventDefault()
   store.updateItemId = $(event.target).data('id')
-  console.log(store.updateItemId)
+  api.showPractice(store.updateItemId)
+    .then(setUpdateModalBody)
+    .catch(ui.updatePracticeFailure)
+}
+
+const setUpdateModalBody = function (data) {
+  // console.log(data)
+  // const updateInfoHtml = updateInfoTemplate({ practices: data.practice })
+  // console.log(updateInfoTemplate)
+  // $('.modal-list').html(updateInfoHtml)
 }
 
 // Delete events
@@ -131,7 +148,6 @@ const cancelDelete = function (event) {
 const selectDelete = function (event) {
   event.preventDefault()
   store.itemId = $(event.target).data('id')
-  console.log(store.itemId)
 }
 
 module.exports = {

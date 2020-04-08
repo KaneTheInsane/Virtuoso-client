@@ -1,6 +1,7 @@
 'use strict'
 
 const indexPracticesTemplate = require('./templates/practice-listing.handlebars')
+const draopdownOptionTemplate = require('./templates/dropdown-option.handlebars')
 const api = require('./api')
 const store = require('./store')
 
@@ -34,6 +35,8 @@ const signInSuccess = function (data) {
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
   $('.secondary').removeClass('hidden')
+  $('#entry-menu').addClass('hidden')
+  $('#sticky-footer').removeClass('hidden')
   store.user = data.user
 }
 
@@ -46,17 +49,13 @@ const signInFailure = function () {
 }
 
 const changePasswordSuccess = function (data) {
-  $('#api-message').text('Password changed successfully')
-  $('#api-message').removeClass()
-  $('#api-message').addClass('success')
+  $('#crud-message').text('Password changed successfully')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
 }
 
 const changePasswordFailure = function () {
-  $('#api-message').text('Error on change password')
-  $('#api-message').removeClass()
-  $('#api-message').addClass('failure')
+  $('#crud-message').text('Error on change password')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
 }
@@ -73,6 +72,7 @@ const signOutSuccess = function (data) {
   $('.table').addClass('hidden')
   $('#log-prt-menu').addClass('hidden')
   $('#prt-stats-menu').addClass('hidden')
+  $('#session-state-message').addClass('hidden')
   $('.box').text('')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
@@ -80,6 +80,12 @@ const signOutSuccess = function (data) {
   $('.secondary').addClass('hidden')
   $('.content').html('')
   $('#warning-message').text('')
+  $('#inputGroupSelect').html('')
+  $('#entry-menu').removeClass('hidden')
+  $('#sticky-footer').addClass('hidden')
+  $('#stat-message').text('')
+  $('#session-count-span').text('')
+  $('#time-count-span').text('')
 }
 
 const signOutFailure = function () {
@@ -91,6 +97,12 @@ const signOutFailure = function () {
 }
 
 const indexPracticesSuccess = function (data) {
+  if (data.practices.length === 0) {
+    $('#session-state-message').removeClass('hidden')
+    $('#session-state-message').text('No Practices Logged')
+  } else {
+    $('#session-state-message').addClass('hidden')
+  }
   $('#log-prt-menu').addClass('hidden')
   $('#prt-stats-menu').addClass('hidden')
   $('.table').removeClass('hidden')
@@ -98,6 +110,10 @@ const indexPracticesSuccess = function (data) {
   $('.content').html(indexPracticesHtml)
   $('#crud-message').text('List of Practices')
   $('#warning-message').text('')
+  $('#inputGroupSelect').html('')
+  $('#stat-message').text('')
+  $('#session-count-span').text('')
+  $('#time-count-span').text('')
 }
 
 const getPracticeStatsSuccess = function (data) {
@@ -112,7 +128,7 @@ const getPracticeStatsSuccess = function (data) {
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
   $('#warning-message').text('')
-  // $('form input[class="form-input"]').val('')
+  $('form input[class="form-input"]').val('')
 }
 
 const updatePracticeSuccess = function (data) {
@@ -135,6 +151,7 @@ const refreshListSuccess = function (data) {
   $('.content').html(indexPracticesHtml)
 }
 
+// Failures Messages
 const refreshListFailure = function (data) {
   $('#crud-message').text(`Failed to Update list`)
 }
@@ -155,8 +172,16 @@ const deletePracticeFailure = function (data) {
   $('#crud-message').text(`Error on Delete`)
 }
 
+const populateDropOptionsFailure = function (data) {
+  $('#crud-message').text(`Failed to Find Instruments`)
+}
+
 const onPracticeStatsButton = function (event) {
   event.preventDefault()
+  api.indexPractices()
+    .then(populateDropOptionsSuccess)
+    .catch(populateDropOptionsFailure)
+  $('#session-state-message').addClass('hidden')
   $('#crud-message').text('Practice Statistics')
   $('.table').addClass('hidden')
   $('#log-prt-menu').addClass('hidden')
@@ -164,13 +189,33 @@ const onPracticeStatsButton = function (event) {
   $('#warning-message').text('')
 }
 
+const populateDropOptionsSuccess = function (data) {
+  const arrayOfOb = Object.values(data.practices)
+  const practiceArray = []
+  for (let i = 0; i < arrayOfOb.length; i++) {
+    practiceArray.push(Object.values(arrayOfOb[i]))
+  }
+  const instrumentArray = []
+  for (let i = 0; i < practiceArray.length; i++) {
+    instrumentArray.push(practiceArray[i][4])
+  }
+  const unique = instrumentArray.filter((item, i, ar) => ar.indexOf(item) === i)
+  const dropOptionsHtml = draopdownOptionTemplate({ instrument: unique })
+  $('#inputGroupSelect').append(dropOptionsHtml)
+}
+
 const onLogPracticeButton = function (event) {
   event.preventDefault()
+  $('#session-state-message').addClass('hidden')
   $('#crud-message').text('Log a New Practice')
   $('.table').addClass('hidden')
   $('#prt-stats-menu').addClass('hidden')
   $('#log-prt-menu').removeClass('hidden')
   $('#warning-message').text('')
+  $('#inputGroupSelect').html('')
+  $('#stat-message').text('')
+  $('#session-count-span').text('')
+  $('#time-count-span').text('')
 }
 
 module.exports = {

@@ -1,0 +1,8 @@
+{{#each practices as |practice|}}
+      <li>Session #: {{@index}}</li>
+      <li>Instrument: {{practice.instrument}}</li>
+      <li>Date: {{practice.date}}</li>
+      <li>Time: {{practice.format_time}}</li>
+      <li>Duration: {{practice.duration}}hrs</li>
+
+{{/each}}

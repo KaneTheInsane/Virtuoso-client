@@ -1,5 +1,8 @@
-const Handlebars = require('handlebars')
 
-Handlebars.registerHelper('inc', function (value, options) {
+'use strict'
+
+const inc = (value, options) => {
   return parseInt(value) + 1
-})
+}
+
+module.exports = inc

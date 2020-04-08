@@ -1,7 +1,7 @@
 {{#each practices as |practice|}}
   <section data-id="{{practice.id}}" class="practice-item">
     <tr>
-      <th scope="row">{{@index}}</th>
+      <th scope="row">{{inc @index}}</th>
       <td>{{practice.instrument}}</td>
       <td>{{practice.duration}}hrs</td>
       <td>{{practice.date}}</td>
@@ -15,7 +15,6 @@
         <button data-id="{{practice.id}}" type="button" class="btn btn-outline-danger delete-modal" data-toggle="modal" data-target="#deleteModal">
           Delete
         </button>
-        <!-- Modal -->
       </td>
     </tr>
   </section>
