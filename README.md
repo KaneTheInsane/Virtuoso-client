@@ -31,6 +31,8 @@ Additionally focusing on the MVP was important. I was able to finish that very q
 
 **[Repo for Virtuoso API](https://github.com/KaneTheInsane/Virtuoso-api)**
 
+**[Deployed API](https://virtuoso-api.herokuapp.com)**
+
 ### Some problems left to solve
 
 **Things to add:**
