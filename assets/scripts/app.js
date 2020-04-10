@@ -34,28 +34,22 @@ $(() => {
   $('.cancel-update').on('click', authEvents.cancelUpdate)
   $('.content').on('click', '.update-modal', authEvents.selectUpdate)
 
-  // Dropdown menu closed after submitting
-  // $('#sign-in-drop').on('submit', function () {
-  //   $('#sign-in-btn').dropdown('toggle')
-  // })
-  // $('#new-game-drop').on('submit', function () {
-  //   $('#new-game-btn').dropdown('toggle')
-  // })
-  // $('#sign-up-drop').on('submit', function () {
-  //   $('#sign-up-btn').dropdown('toggle')
-  // })
-  // $('#change-password-drop').on('submit', function () {
-  //   $('#change-password-btn').dropdown('toggle')
-  // })
-  // $('#create-prt-drop').on('submit', function () {
-  //   $('#create-prt-btn').dropdown('toggle')
-  // })
-  // $('#update-prt-drop').on('submit', function () {
-  //   $('#update-prt-btn').dropdown('toggle')
-  // })
-  // $('#delete-prt-drop').on('submit', function () {
-  //   $('#delete-prt-btn').dropdown('toggle')
-  // })
+  $('#SUEnter').keypress(function (event) {
+    console.log(event.keyCode)
+    if (event.keyCode === 13) {
+      $('.sign-up-button').click()
+    }
+  })
+  $('#SIEnter').keypress(function (event) {
+    if (event.keyCode === 13) {
+      $('.sign-in-button').click()
+    }
+  })
+  $('#CPnter').keypress(function (event) {
+    if (event.keyCode === 13) {
+      $('.change-password-button').click()
+    }
+  })
 })
 
 // <option value="{{inc @index}}">{{this}}</option>

@@ -128,7 +128,7 @@ const getPracticeStatsSuccess = function (data) {
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
   $('#warning-message').text('')
-  $('form input[class="form-input"]').val('')
+  $('#create-prt')[0].reset('')
 }
 
 const updatePracticeSuccess = function (data) {

@@ -37,8 +37,10 @@ Additionally focusing on the MVP was important. I was able to finish that very q
 
 **Things to add:**
   * Metronome
-  * or total practice time on a day
-  * show calender with all days practiced
+  * show calender with all days practiced (github style)
+  * calender shows total time on each day
   * add exercise to practices (Practices have_many Exercises)
   * progress bar to reach master
-  * have search funtion for certain dates, instruments, start time, or duration
+  * have search funtion for certain dates, instruments, start time, or duration find
+  * Show who is logged in (profile picture)
+  * Edit changes data in table to inputs and then turns to confirm, no update popup and does not change position

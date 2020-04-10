@@ -39,6 +39,20 @@ h3 {
   padding-left: 25px;
 }
 
+a {
+  color: $font-color;
+ }
+
+input {
+  margin: 8px;
+  padding: 8px;
+}
+
+nav {
+  background-color: $accent-color;
+  display: flex;
+}
+
 footer {
   background: $footer;
   bottom: 0;
@@ -47,19 +61,6 @@ footer {
   position: fixed;
   text-align: center;
   width: 100%;
-}
-
-a {
-  color: $font-color;
-}
-
-input {
-  margin: 8px;
-}
-
-nav {
-  background-color: $accent-color;
-  display: flex;
 }
 
 .selector {
@@ -156,16 +157,16 @@ nav {
   color: $font-color;
   // display: flex;
   font-size: 150%;
-  height: 400px;
   justify-content: center;
+//   height: 400px;
   margin-top: 200px;
-  width: 600px;
+//   width: 600px;
 }
 
 .entry-container {
   align-items: center;
-  background-image: url('https://imgur.com/zZiwVXp.jpg');
   background-color: $secondary;
+  background-image: url('https://imgur.com/zZiwVXp.jpg');
   border: 1px solid $accent-color;
   color: $font-color;
   display: flex;
