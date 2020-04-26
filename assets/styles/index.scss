@@ -44,8 +44,8 @@ a {
  }
 
 input {
-  margin: 8px;
-  padding: 8px;
+  // margin: 8px;
+  // padding: 8px;
 }
 
 nav {
@@ -61,6 +61,10 @@ footer {
   position: fixed;
   text-align: center;
   width: 100%;
+}
+
+tbody > input {
+  padding: 0;
 }
 
 .selector {

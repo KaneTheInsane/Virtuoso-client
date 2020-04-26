@@ -1,0 +1,14 @@
+  <section data-id="{{practice.id}}" class="practice-item">
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      <td><input value="{{practice.instrument}}" class="form-input" type="text" name="practice[instrument]" placeholder="Instrument"></td>
+      <td><input value="{{practice.date}}" class="form-input" type="date" name="practice[date]" placeholder="date"></td>
+      <td><input value="{{practice.format_time}}" class="form-input" type="time" name="practice[start_time]" placeholder="time"></td>
+      <td><input class="form-input" type="number" step="0.1" min="0" max="24" name="practice[duration]" placeholder="0.0hrs"></td>
+      <td>
+        <button data-id="{{practice.id}}" type="button" class="btn btn-success my-2 my-sm-0 update-modal">
+          Confirm
+        </button>
+      </td>
+    </tr>
+  </section>

@@ -2,7 +2,8 @@
 
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
-const authEvents = require('./auth-events.js')
+const authEvents = require('./auth/events.js')
+const practiceEvents = require('./practices/events')
 const uiEvents = require('./ui')
 // use require without a reference to ensure a file is bundled
 // require('./example')
@@ -19,20 +20,20 @@ $(() => {
   $('#prt-stats-btn').on('click', uiEvents.onPracticeStatsButton)
 
   // User actions
-  $('#index-prt-btn').on('submit', authEvents.onIndexPractices)
-  // $('#get-prt-stats').on('submit', authEvents.onGetPracticeStats)
-  $('#prt-stats-menu').on('submit', authEvents.onGetPracticeStats)
-  $('#create-prt').on('submit', authEvents.onCreatePractice)
+  $('#index-prt-btn').on('submit', practiceEvents.onIndexPractices)
+  // $('#get-prt-stats').on('submit', practiceEvents.onGetPracticeStats)
+  $('#prt-stats-menu').on('submit', practiceEvents.onGetPracticeStats)
+  $('#create-prt').on('submit', practiceEvents.onCreatePractice)
 
   // Delete actions
-  $('.delete-button').on('click', authEvents.onDeletePractice)
-  $('.cancel-delete').on('click', authEvents.cancelDelete)
-  $('.content').on('click', '.delete-modal', authEvents.selectDelete)
+  $('.delete-button').on('click', practiceEvents.onDeletePractice)
+  $('.cancel-delete').on('click', practiceEvents.cancelDelete)
+  $('.content').on('click', '.delete-modal', practiceEvents.selectDelete)
 
   // Update actions
-  $('.update-button').on('click', authEvents.onUpdatePractice)
-  $('.cancel-update').on('click', authEvents.cancelUpdate)
-  $('.content').on('click', '.update-modal', authEvents.selectUpdate)
+  $('.update-button').on('click', practiceEvents.onUpdatePractice)
+  $('.cancel-update').on('click', practiceEvents.cancelUpdate)
+  $('.content').on('click', '.update-modal', practiceEvents.selectUpdate)
 
   $('#SUEnter').keypress(function (event) {
     console.log(event.keyCode)

@@ -1,43 +1,10 @@
 'use strict'
 
-const getFormFields = require('../../lib/get-form-fields')
+const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
-const store = require('./store')
-// const updateInfoTemplate = require('./templates/update-info.handlebars')
-
-// Auth Events
-
-const onSignUp = function (event) {
-  event.preventDefault()
-  const data = getFormFields($('#sign-up')[0])
-  api.signUp(data)
-    .then(ui.signUpSuccess)
-    .catch(ui.signUpFailure)
-}
-
-const onSignIn = function (event) {
-  event.preventDefault()
-  const data = getFormFields($('#sign-in')[0])
-  api.signIn(data)
-    .then(ui.signInSuccess)
-    .catch(ui.signInFailure)
-}
-
-const onChangePassword = function (event) {
-  event.preventDefault()
-  const data = getFormFields($('#change-password')[0])
-  api.changePassword(data)
-    .then(ui.changePasswordSuccess)
-    .catch(ui.changePasswordFailure)
-}
-
-const onSignOut = function (event) {
-  event.preventDefault()
-  api.signOut()
-    .then(ui.signOutSuccess)
-    .catch(ui.signOutFailure)
-}
+const store = require('../store')
+const updateTableTemplate = require('../templates/update-table.handlebars')
 
 // Get events
 
@@ -118,16 +85,18 @@ const cancelUpdate = function (event) {
 const selectUpdate = function (event) {
   event.preventDefault()
   store.updateItemId = $(event.target).data('id')
+  console.log($(`section[data-id=${store.updateItemId}]`)[0])
   api.showPractice(store.updateItemId)
-    .then(setUpdateModalBody)
+    .then(updateTable)
     .catch(ui.updatePracticeFailure)
 }
 
-const setUpdateModalBody = function (data) {
-  // console.log(data)
-  // const updateInfoHtml = updateInfoTemplate({ practices: data.practice })
-  // console.log(updateInfoTemplate)
-  // $('.modal-list').html(updateInfoHtml)
+const updateTable = function (data) {
+  console.log(data)
+  const updateTableHtml = updateTableTemplate({practice: data.practice})
+  console.log(updateTableHtml)
+  $((`section[data-id=${store.updateItemId}]`)[0]).replaceWith(updateTableHtml)
+  $('#content').append(updateTableHtml)
 }
 
 // Delete events
@@ -151,10 +120,6 @@ const selectDelete = function (event) {
 }
 
 module.exports = {
-  onSignUp,
-  onSignIn,
-  onChangePassword,
-  onSignOut,
   onIndexPractices,
   onCreatePractice,
   onUpdatePractice,
