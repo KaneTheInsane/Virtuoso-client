@@ -67,6 +67,11 @@ tbody > input {
   padding: 0;
 }
 
+#metronome-switch {
+  margin-left: auto;
+  height: 30px;
+}
+
 .selector {
   background-color: $secondary;
   opacity: 1;
@@ -122,6 +127,12 @@ tbody > input {
   display: flex;
   justify-content: center;
   margin-top: 5px;
+}
+
+.metrenome {
+  color: black;
+  max-width: 47px;
+  max-height: 30px;
 }
 
 .session-state-message {
