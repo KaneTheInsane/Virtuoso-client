@@ -5,6 +5,7 @@
 const authEvents = require('./auth/events.js')
 const practiceEvents = require('./practices/events')
 const uiEvents = require('./ui')
+const metrenomeEvents = require('./metrenome/events')
 // use require without a reference to ensure a file is bundled
 // require('./example')
 
@@ -34,6 +35,10 @@ $(() => {
   $('.update-button').on('click', practiceEvents.onUpdatePractice)
   $('.cancel-update').on('click', practiceEvents.cancelUpdate)
   $('.content').on('click', '.update-modal', practiceEvents.selectUpdate)
+
+  // Metronome actions
+  $('#metronome-switch').on('change', metrenomeEvents.toggleMetrenome)
+  $('#audio-test').on('click', metrenomeEvents.playSound)
 
   $('#SUEnter').keypress(function (event) {
     console.log(event.keyCode)
