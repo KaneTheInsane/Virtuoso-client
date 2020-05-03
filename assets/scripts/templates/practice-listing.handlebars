@@ -1,6 +1,5 @@
 {{#each practices as |practice|}}
-  <section data-id="{{practice.id}}" class="practice-item">
-    <tr>
+    <tr data-id="{{practice.id}}">
       <th scope="row">{{inc @index}}</th>
       <td>{{practice.instrument}}</td>
       <td>{{practice.duration}}hrs</td>
@@ -17,6 +16,4 @@
         </button>
       </td>
     </tr>
-  </section>
-
 {{/each}}

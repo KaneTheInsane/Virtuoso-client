@@ -1,6 +1,7 @@
 'use strict'
 
 const indexPracticesTemplate = require('../templates/practice-listing.handlebars')
+const statMenuTemplate = require('../templates/stats-menu-template.handlebars')
 const store = require('../store')
 const api = require('./api')
 
@@ -24,13 +25,36 @@ const indexPracticesSuccess = function (data) {
   $('#time-count-span').text('')
 }
 
+function parser (data) {
+  const stats = {}
+  for (let i = 0; i < data.length; i++) {
+    stats[Math.floor(new Date(data[i].created_at).getTime() / 1000)] = data[i].duration
+  }
+  return stats
+}
+
 const getPracticeStatsSuccess = function (data) {
-  const singleInstrumentArray = data.practices.filter(x => x.instrument === store.instrumentStat)
-  const totalTime = singleInstrumentArray.reduce(function (prev, cur) {
-    return prev + cur.duration
-  }, 0)
-  $('#session-count-span').text(singleInstrumentArray.length)
-  $('#time-count-span').text(Math.round(totalTime * 10) / 10)
+  const statData = {}
+  if (store.instrumentStat === 'Total') {
+    const totalTime = data.practices.reduce(function (prev, cur) {
+      return prev + cur.duration
+    }, 0)
+    statData.jsonObj = JSON.stringify(parser(data.practices))
+    statData.totalTime = totalTime
+    statData.totalSessions = data.practices.length
+  } else {
+    const singleInstrumentArray = data.practices.filter(x => x.instrument === store.instrumentStat)
+    const totalTime = singleInstrumentArray.reduce(function (prev, cur) {
+      return prev + cur.duration
+    }, 0)
+    statData.jsonObj = JSON.stringify(parser(singleInstrumentArray))
+    statData.totalTime = totalTime
+    statData.totalSessions = singleInstrumentArray.length
+  }
+  statData.instrument = store.instrumentStat
+  statData.lastYear = (new Date()).setMonth((new Date().getMonth() - 11))
+  const statMenuHtml = statMenuTemplate({ practices: statData })
+  $('#stat-content').html(statMenuHtml)
 }
 
 const createPracticeSuccess = function (data) {
@@ -55,6 +79,11 @@ const deletePracticeSuccess = function (data) {
 }
 
 const refreshListSuccess = function (data) {
+  data.practices = data.practices.sort(function (a, b) {
+    a = new Date(a.created_at)
+    b = new Date(b.created_at)
+    return a > b ? -1 : a < b ? 1 : 0
+  })
   const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
   $('.content').html(indexPracticesHtml)
 }

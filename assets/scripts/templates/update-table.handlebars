@@ -1,14 +1,15 @@
-  <section data-id="{{practice.id}}" class="practice-item">
-    <tr>
-      <th scope="row">{{inc @index}}</th>
-      <td><input value="{{practice.instrument}}" class="form-input" type="text" name="practice[instrument]" placeholder="Instrument"></td>
-      <td><input value="{{practice.date}}" class="form-input" type="date" name="practice[date]" placeholder="date"></td>
-      <td><input value="{{practice.format_time}}" class="form-input" type="time" name="practice[start_time]" placeholder="time"></td>
-      <td><input class="form-input" type="number" step="0.1" min="0" max="24" name="practice[duration]" placeholder="0.0hrs"></td>
+      <th scope="row">*</th>
+      <td><input id="update-input-instrument" data-id="{{practice.id}}" value="{{practice.instrument}}" class="form-input" type="text" name="practice[instrument]" placeholder="Instrument"></td>
+      <td><input id="update-input-duration" data-id="{{practice.id}}" value="{{practice.duration}}"class="form-input" type="number" step="0.1" min="0" max="24" name="practice[duration]" placeholder="0.0hrs">/td>
+      <td><input id="update-input-date" data-id="{{practice.id}}" value="{{practice.date}}" class="form-input" type="date" name="practice[date]" placeholder="date"></td>
+      <td><input id="update-input-time" data-id="{{practice.id}}" value="{{practice.format_time}}" class="form-input" type="text" name="practice[start_time]" placeholder="time"></td>
       <td>
-        <button data-id="{{practice.id}}" type="button" class="btn btn-success my-2 my-sm-0 update-modal">
+        <button data-id="{{practice.id}}" type="button" class="btn btn-success my-2 my-sm-0 update-button">
           Confirm
         </button>
       </td>
-    </tr>
-  </section>
+      <td>
+        <button data-id="{{practice.id}}" type="button" class="btn btn-outline-secondary cancel-update">
+          Cancel
+        </button>
+      </td>

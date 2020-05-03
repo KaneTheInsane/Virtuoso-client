@@ -1,0 +1,24 @@
+  <h3 class="stat-header">{{practices.instrument}} Statistics</h3>
+  <p id='session-count'>Sessions: {{practices.totalSessions}}</span></p><br>
+  <p id='time-count'>Hours: {{practices.totalTime}}</p><br>
+  <div id="cal-heatmap"></div>
+    <script type="text/javascript">
+      var cal = new CalHeatMap()
+      cal.init({
+        data: {{{practices.jsonObj}}},
+        considerMissingDataAsZero: true,
+        domain: "month",
+        itemName: ["Hour", "Hours"],
+        start: {{practices.lastYear}},
+	      subDomain: "day",
+        dataType: "json",
+        legend: [0.5, 1, 1.5, 2, 3, 4, 6],
+        legendColors: {
+		      min: "#8e8cff",
+		      max: "#0400ff",
+		      empty: "#8a8a91"
+	}
+      })
+    </script>
+  <p id='stat-message'></p>
+</div>

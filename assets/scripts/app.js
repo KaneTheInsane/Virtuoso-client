@@ -32,8 +32,8 @@ $(() => {
   $('.content').on('click', '.delete-modal', practiceEvents.selectDelete)
 
   // Update actions
-  $('.update-button').on('click', practiceEvents.onUpdatePractice)
-  $('.cancel-update').on('click', practiceEvents.cancelUpdate)
+  $('.content').on('click', '.update-button', practiceEvents.onUpdatePractice)
+  $('.content').on('click', '.cancel-update', practiceEvents.cancelUpdate)
   $('.content').on('click', '.update-modal', practiceEvents.selectUpdate)
 
   // Metronome actions

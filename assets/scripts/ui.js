@@ -43,7 +43,7 @@ const onLogPracticeButton = function (event) {
   $('#prt-stats-menu').addClass('hidden')
   $('#log-prt-menu').removeClass('hidden')
   $('#warning-message').text('')
-  $('#inputGroupSelect').html('')
+  $('#inputGroupSelect').html('<option selected  value="Total" class="light">Total</option>')
   $('#stat-message').text('')
   $('#session-count-span').text('')
   $('#time-count-span').text('')
