@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Oxanium&amp;=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/cal-heatmap.css" />
     <!-- Do not add `link` tags-->
     <link rel="shortcut icon" href="https://imgur.com/qrowzuX.png">
 
     <!-- Do not add `script` tags-->
     <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
     <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./lib/cal-heatmap.min.js"></script>
     <script src="lib/input-knob.js" type="text/javascript"></script>
     <script src="lib/knob-min.js" type="text/javascript"></script>
   </head>
@@ -47,8 +50,9 @@
       </form>
       <!-- CRUD Messages -->
       <h3 id="crud-message"></h3>
-        <input id="metronome-switch" type="checkbox" class="input-switch flex-end">
-        <input id="metronome-bpm" value="100" class="metrenome" type="number" min="60" max="200" onkeyup="if(this.value > 200) this.value = 200;">
+      <!-- Metrenome -->
+      <input id="metronome-switch" type="checkbox" class="input-switch flex-end" data-fgcolor="#0400ff">
+      <input id="metronome-bpm" value="100" class="metrenome" type="number" min="60" max="200" onkeyup="if(this.value > 200) this.value = 200;">
       <!-- Account menu -->
       <div class="nav-item dropdown my-2 my-lg-0 dropleft account">
         <a class="nav-link btn btn-outline-light my-2 my-sm-0" href="#"role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -102,21 +106,20 @@
       </div>
       <!-- Practice Statistics -->
         <!-- Option menu -->
-      <div id="prt-stats-menu" class="container col-8 rounded border border-white light hidden">
-        <form class="input-group populate">
-          <select class="custom-select selector" id="inputGroupSelect">
-            <option selected class="light">Choose...</option>
-          </select>
-          <div class="input-group-append">
-            <button id="get-prt-stats" class="btn btn-outline-light" type="submit">Stats</button>
+        <div id="prt-stats-menu" class="container col-8 rounded border border-white light hidden">
+          <form class="input-group populate">
+            <select class="custom-select selector" id="inputGroupSelect">
+              <option selected  value="Total" class="light">Total</option>
+            </select>
+            <div class="input-group-append">
+              <button id="get-prt-stats" class="btn btn-outline-light" type="submit">Stats</button>
+            </div>
+          </form>
+          <!-- Practice Stat Data -->
+          <div id="stat-content">
+          <p id='stat-message'></p>
           </div>
-        </form>
-        <!-- Practice Stat Data -->
-        <p id='session-count'>Total Sessions: <span id="session-count-span"></span></p><br>
-        <p id='time-count'>Total Hours: <span id="time-count-span"></span></p><br>
-        <div id="svg-root"></div>
-        <p id='stat-message'></p>
-      </div>
+        </div>
       <!-- Change Password Modal -->
       <div class="modal fade changePasswordModal" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

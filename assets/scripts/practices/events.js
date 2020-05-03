@@ -51,27 +51,14 @@ const onCreatePractice = function (event) {
 
 const onUpdatePractice = function (event) {
   event.preventDefault()
-  store.updateData = getFormFields($('.update-prt')[0])
-  api.showPractice()
-    .then(checkPracticeForEmpty)
-    .catch(ui.updatePracticeFailure)
-}
-const checkPracticeForEmpty = function (data) {
-  const currentValueArray = Object.values(data.practice).slice(1, 5)
-  const updateValueArray = Object.values(store.updateData.practice)
-  const instrument = currentValueArray.pop()
-  currentValueArray.unshift(instrument)
-  for (let i = 0; i <= updateValueArray.length; i++) {
-    if (updateValueArray[i] === '') {
-      updateValueArray[i] = currentValueArray[i]
-    }
-  }
   const practiceData = { practice: {
-    date: updateValueArray[1],
-    start_time: updateValueArray[2],
-    duration: updateValueArray[3],
-    instrument: updateValueArray[0]
+    date: $($('#update-input-date')[0]).val(),
+    start_time: $($('#update-input-time')[0]).val(),
+    duration: $($('#update-input-duration')[0]).val(),
+    instrument: $($('#update-input-instrument')[0]).val()
   }}
+  $('.update-modal').removeClass('hidden')
+  $('.delete-modal').removeClass('hidden')
   api.updatePractice(practiceData, store.updateItemId)
     .then(ui.updatePracticeSuccess)
     .catch(ui.updatePracticeFailure)
@@ -80,23 +67,26 @@ const checkPracticeForEmpty = function (data) {
 const cancelUpdate = function (event) {
   event.preventDefault()
   store.updateItemId = undefined
+  $('.update-modal').removeClass('hidden')
+  $('.delete-modal').removeClass('hidden')
+  api.indexPractices()
+    .then(ui.indexPracticesSuccess)
+    .catch(ui.indexPracticesFailure)
 }
 
 const selectUpdate = function (event) {
   event.preventDefault()
   store.updateItemId = $(event.target).data('id')
-  console.log($(`section[data-id=${store.updateItemId}]`)[0])
+  $('.update-modal').addClass('hidden')
+  $('.delete-modal').addClass('hidden')
   api.showPractice(store.updateItemId)
     .then(updateTable)
     .catch(ui.updatePracticeFailure)
 }
 
 const updateTable = function (data) {
-  console.log(data)
   const updateTableHtml = updateTableTemplate({practice: data.practice})
-  console.log(updateTableHtml)
-  $((`section[data-id=${store.updateItemId}]`)[0]).replaceWith(updateTableHtml)
-  $('#content').append(updateTableHtml)
+  $($(`tr[data-id=${store.updateItemId}]`)[0]).html(updateTableHtml)
 }
 
 // Delete events

@@ -43,11 +43,6 @@ a {
   color: $font-color;
  }
 
-input {
-  // margin: 8px;
-  // padding: 8px;
-}
-
 nav {
   background-color: $accent-color;
   display: flex;
@@ -68,8 +63,18 @@ tbody > input {
 }
 
 #metronome-switch {
-  margin-left: auto;
+  border-radius: 5px 0 0 5px;
   height: 30px;
+  margin-left: auto;
+}
+
+#stat-content {
+  justify-content: center;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: center;
 }
 
 .selector {
@@ -130,9 +135,11 @@ tbody > input {
 }
 
 .metrenome {
-  color: black;
-  max-width: 47px;
+  background-color: black;
+  border-radius: 0 5px 5px 0;
+  margin-right: 20px;
   max-height: 30px;
+  max-width: 47px;
 }
 
 .session-state-message {
@@ -161,21 +168,14 @@ tbody > input {
   font-size: 60%;
 }
 
-.account {
-  margin-left: auto;
-}
-
 .container {
   align-items: center;
   background-color: $secondary;
   border: 1px solid $accent-color;
   color: $font-color;
-  // display: flex;
   font-size: 150%;
   justify-content: center;
-//   height: 400px;
   margin-top: 200px;
-//   width: 600px;
 }
 
 .entry-container {
@@ -199,4 +199,21 @@ tbody > input {
 
 .button {
   padding: 8px;
+}
+
+table td {
+  position: relative;
+}
+
+table td input {
+  border: 0;
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
