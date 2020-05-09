@@ -6,10 +6,11 @@ let timerID
 let count = 0
 
 function toggleMetrenome (check) {
-  console.log($('#metronome-switch'))
   if ($('#metronome-switch')[0].checked) {
+    count = 0
     scheduler()
   } else {
+    count = 0
     stopAudio()
   }
 }
@@ -37,7 +38,6 @@ function scheduler () {
 }
 
 function stopAudio () {
-  count = 0
   clearTimeout(timerID)
   if (audioContext.state === 'suspended') {
     audioContext.resume()

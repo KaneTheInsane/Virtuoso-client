@@ -41,6 +41,7 @@ const onCreatePractice = function (event) {
     $('#warning-message').text('Please fill out all forms')
   } else {
     data.practice.instrument = instrument.charAt(0).toUpperCase() + instrument.slice(1)
+    console.log(data)
     api.createPractice(data)
       .then(ui.createPracticeSuccess)
       .catch(ui.createPracticeFailure)
@@ -57,8 +58,8 @@ const onUpdatePractice = function (event) {
     duration: $($('#update-input-duration')[0]).val(),
     instrument: $($('#update-input-instrument')[0]).val()
   }}
-  $('.update-modal').removeClass('hidden')
-  $('.delete-modal').removeClass('hidden')
+  $('.update-modal').attr('disabled', false)
+  $('.delete-modal').attr('disabled', false)
   api.updatePractice(practiceData, store.updateItemId)
     .then(ui.updatePracticeSuccess)
     .catch(ui.updatePracticeFailure)
@@ -67,8 +68,8 @@ const onUpdatePractice = function (event) {
 const cancelUpdate = function (event) {
   event.preventDefault()
   store.updateItemId = undefined
-  $('.update-modal').removeClass('hidden')
-  $('.delete-modal').removeClass('hidden')
+  $('.update-modal').attr('disabled', false)
+  $('.delete-modal').attr('disabled', false)
   api.indexPractices()
     .then(ui.indexPracticesSuccess)
     .catch(ui.indexPracticesFailure)
@@ -77,8 +78,8 @@ const cancelUpdate = function (event) {
 const selectUpdate = function (event) {
   event.preventDefault()
   store.updateItemId = $(event.target).data('id')
-  $('.update-modal').addClass('hidden')
-  $('.delete-modal').addClass('hidden')
+  $('.update-modal').attr('disabled', true)
+  $('.delete-modal').attr('disabled', true)
   api.showPractice(store.updateItemId)
     .then(updateTable)
     .catch(ui.updatePracticeFailure)
@@ -109,6 +110,41 @@ const selectDelete = function (event) {
   store.itemId = $(event.target).data('id')
 }
 
+// Auto log
+
+function onStartAutoLog () {
+  if ($('.log-drop').val() !== '') {
+    $('.stp-auto-log').removeClass('hidden')
+    $('.str-auto-log').addClass('hidden')
+    store.logStart = new Date()
+  } else {
+    $('#warning-message').text('Cannot leave instrument field blank')
+  }
+}
+
+function onStopAutoLog () {
+  $('.str-auto-log').removeClass('hidden')
+  $('.stp-auto-log').addClass('hidden')
+  const stopLog = new Date()
+  const instrument = $('.log-drop').val()
+  const instrumentCapitilized = instrument.charAt(0).toUpperCase() + instrument.slice(1)
+  const duration = ((stopLog.getTime()) - (store.logStart.getTime())) / 1000 / 60
+  const durationMinutes = Math.round(duration)
+  if (durationMinutes > 1) {
+    const practiceData = { practice: {
+      date: store.logStart.toLocaleDateString(),
+      start_time: store.logStart.toLocaleTimeString(),
+      duration: durationMinutes, // in minutes
+      instrument: instrumentCapitilized
+    }}
+    api.createPractice(practiceData)
+      .then(ui.createPracticeSuccess)
+      .catch(ui.createPracticeFailure)
+  } else {
+    $('#warning-message').text('Cannot record session under 1 minute')
+  }
+}
+
 module.exports = {
   onIndexPractices,
   onCreatePractice,
@@ -118,5 +154,7 @@ module.exports = {
   cancelDelete,
   selectDelete,
   cancelUpdate,
-  selectUpdate
+  selectUpdate,
+  onStartAutoLog,
+  onStopAutoLog
 }

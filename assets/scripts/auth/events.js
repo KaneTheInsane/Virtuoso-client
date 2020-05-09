@@ -1,12 +1,14 @@
 'use strict'
 
 const getFormFields = require('../../../lib/get-form-fields')
+const store = require('../store')
 const api = require('./api')
 const ui = require('./ui')
 
 const onSignUp = function (event) {
   event.preventDefault()
   const data = getFormFields($('#sign-up')[0])
+  store.userPassword = data.credentials.password
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
@@ -15,6 +17,16 @@ const onSignUp = function (event) {
 const onSignIn = function (event) {
   event.preventDefault()
   const data = getFormFields($('#sign-in')[0])
+  api.signIn(data)
+    .then(ui.signInSuccess)
+    .catch(ui.signInFailure)
+}
+
+const onDemoSignIn = function () {
+  const data = { credentials: {
+    email: 'Demo',
+    password: 'demo'
+  }}
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
@@ -39,5 +51,6 @@ module.exports = {
   onSignUp,
   onSignIn,
   onChangePassword,
-  onSignOut
+  onSignOut,
+  onDemoSignIn
 }
