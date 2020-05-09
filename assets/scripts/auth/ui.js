@@ -1,14 +1,21 @@
 'use strict'
 
 const store = require('../store')
+const api = require('./api')
 
 const signUpSuccess = function (data) {
-  $('#api-message').text('Signed up successfully')
   $('#api-message').removeClass()
   $('#api-message').addClass('success')
+  store.user = data.user
+  const signInData = { credentials: {
+    email: data.user.email,
+    password: store.userPassword
+  }}
+  api.signIn(signInData)
+    .then(signInSuccess)
+    .catch(signInFailure)
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
-  store.user = data.user
 }
 
 const signUpFailure = function () {
@@ -68,6 +75,7 @@ const signOutSuccess = function (data) {
   $('#log-prt-menu').addClass('hidden')
   $('#prt-stats-menu').addClass('hidden')
   $('#session-state-message').addClass('hidden')
+  $('#auto-log-practices').addClass('hidden')
   $('.box').text('')
   $('form input[type="text"]').val('')
   $('form input[type="password"]').val('')
@@ -81,6 +89,7 @@ const signOutSuccess = function (data) {
   $('#stat-message').text('')
   $('#session-count-span').text('')
   $('#time-count-span').text('')
+  $('#stat-content').html('')
 }
 
 const signOutFailure = function () {

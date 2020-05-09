@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles/cal-heatmap.css" />
     <!-- Do not add `link` tags-->
-    <link rel="shortcut icon" href="https://imgur.com/qrowzuX.png">
+    <link rel="shortcut icon" href="https://imgur.com/UHpITQH.png">
 
     <!-- Do not add `script` tags-->
     <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
@@ -22,12 +22,15 @@
     <div id="entry-menu" class="entry-container container col-4 rounded border border-white">
       <h2 class="logo2">Virtuoso</h2>
       <div class="break"></div>
-      <button type="button" class="btn btn-outline-light my-2 my-sm-0 sign-up-modal entry-button" data-toggle="modal" data-target="#signUpModal">
+      <button type="button" class="btn btn-outline-light my-2 my-sm-0 sign-up-modal entry-button" data-toggle="modal" data-target="#signUpModal" data-toggle="tooltip" data-placement="top" title="server takes a second to wake up">
         Sign Up
       </button>
-      <button type="button" class="btn btn-outline-light my-2 my-sm-0 sign-in-modal entry-button" data-toggle="modal" data-target="#signInModal">
+      <button type="button" class="btn btn-outline-light my-2 my-sm-0 sign-in-modal entry-button" data-toggle="modal" data-target="#signInModal" data-toggle="tooltip" data-placement="top" title="server takes a second to wake up">
         Sign in
       </button>
+      <!-- <button id="Demo" type="button" class="btn btn-outline-light my-2 my-sm-0 sign-in-modal entry-button" data-toggle="tooltip" data-placement="top" title="Explore the app with demo data">
+        Demo
+      </button> -->
       <div class="break"></div>
       <h2 id="api-message">Practice With Ease</h2>
       <a class="link-2" href="https://www.linkedin.com/in/kanetwofeathers/" target="_blank">© Kane Two Feathers 2020</a>
@@ -36,17 +39,17 @@
     <!-- Bootstrap nav bar -->
     <nav class="secondary navbar navbar-expand hidden fixed-top">
       <h1 class="logo">Virtuoso</h1>
-      <!-- Index practices-->
-      <form id="index-prt-btn" class="my-2 my-lg-0">
-        <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="List Practices">
-      </form>
           <!-- Log New Practice -->
       <form id="log-prt-btn" class="form-inline my-2 my-lg-0">
-        <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Log New Practice">
+        <input class="btn btn-outline-light my-2 my-sm-0 menu-button" type="submit" value="Log New Practice">
       </form>
       <!-- Practice Stats Button-->
       <form id="prt-stats-btn" class="form-inline my-2 my-lg-0">
-        <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Practice Stats">
+        <input class="btn btn-outline-light my-2 my-sm-0 menu-button" type="submit" value="Practice Stats">
+      </form>
+      <!-- Index practices-->
+      <form id="index-prt-btn" class="my-2 my-lg-0">
+        <input class="btn btn-outline-light my-2 my-sm-0 menu-button" type="submit" value="List Practices">
       </form>
       <!-- CRUD Messages -->
       <h3 id="crud-message"></h3>
@@ -87,7 +90,24 @@
         </tbody>
       </table>
       <!-- Log Practices -->
-      <div id="log-prt-menu" class="container col-6 rounded border border-white hidden">
+      <!-- Auto Log -->
+      <div id="auto-log-practices" class="log-menu container col-4 rounded border border-white hidden">
+        <label>Select an Instrument<br>
+          <input list="instruments" name="myInstrument" class="log-drop"/></label>
+          <datalist id="instruments">
+          </datalist>
+        <button type="button" class="btn btn-success my-2 my-sm-0 str-auto-log">
+          Start Log
+        </button>
+        <button type="button" class="btn btn-danger my-2 my-sm-0 stp-auto-log hidden">
+          Stop Log
+        </button>
+        <button type="button" class="btn btn-light my-2 my-sm-0 manual-log">
+          Manual Log
+        </button>
+      </div>
+      <!-- Manual Log -->
+      <div id="log-prt-menu" class="log-menu container col-6 rounded border border-white hidden">
         <form id="create-prt">
           <div class="form-group">
             <input class="form-input form-control" type="text" name="practice[instrument]" placeholder="Instrument">
@@ -99,8 +119,11 @@
             <input class="form-input form-control" type="time" name="practice[start_time]" placeholder="time">
           </div>
           <div class="form-group">
-            <input class="form-input form-control" type="number" step="0.1" min="0" max="24" name="practice[duration]" placeholder="0.0hrs">
+            <input class="form-input form-control" type="number" step="0" min="0" max="300" name="practice[duration]" placeholder="0 Mins">
           </div>
+          <button type="button" class="btn btn-light my-2 my-sm-0 auto-log">
+            Auto Log
+          </button>
           <input type="submit" value="Create" class="btn btn-outline-light my-2 my-sm-0">
         </form>
       </div>

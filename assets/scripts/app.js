@@ -15,16 +15,21 @@ $(() => {
   $('.sign-in-button').on('click', authEvents.onSignIn)
   $('.change-password-button').on('click', authEvents.onChangePassword)
   $('#sign-out-btn').on('submit', authEvents.onSignOut)
+  $('#Demo').on('click', authEvents.onDemoSignIn)
 
   // Pure UI actions
   $('#log-prt-btn').on('click', uiEvents.onLogPracticeButton)
   $('#prt-stats-btn').on('click', uiEvents.onPracticeStatsButton)
+  $('.manual-log').on('click', uiEvents.manualLogPractice)
+  $('.auto-log').on('click', uiEvents.autoLogPractice)
 
   // User actions
   $('#index-prt-btn').on('submit', practiceEvents.onIndexPractices)
   // $('#get-prt-stats').on('submit', practiceEvents.onGetPracticeStats)
   $('#prt-stats-menu').on('submit', practiceEvents.onGetPracticeStats)
   $('#create-prt').on('submit', practiceEvents.onCreatePractice)
+  $('.str-auto-log').on('click', practiceEvents.onStartAutoLog)
+  $('.stp-auto-log').on('click', practiceEvents.onStopAutoLog)
 
   // Delete actions
   $('.delete-button').on('click', practiceEvents.onDeletePractice)
@@ -40,8 +45,8 @@ $(() => {
   $('#metronome-switch').on('change', metrenomeEvents.toggleMetrenome)
   $('#audio-test').on('click', metrenomeEvents.playSound)
 
+  // Enter key confirms sign in/up
   $('#SUEnter').keypress(function (event) {
-    console.log(event.keyCode)
     if (event.keyCode === 13) {
       $('.sign-up-button').click()
     }

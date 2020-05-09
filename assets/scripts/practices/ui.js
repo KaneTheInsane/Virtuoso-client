@@ -6,6 +6,11 @@ const store = require('../store')
 const api = require('./api')
 
 const indexPracticesSuccess = function (data) {
+  data.practices = data.practices.sort(function (a, b) {
+    a = new Date(a.created_at)
+    b = new Date(b.created_at)
+    return a > b ? -1 : a < b ? 1 : 0
+  })
   if (data.practices.length === 0) {
     $('#session-state-message').removeClass('hidden')
     $('#session-state-message').text('No Practices Logged')
@@ -14,12 +19,13 @@ const indexPracticesSuccess = function (data) {
   }
   $('#log-prt-menu').addClass('hidden')
   $('#prt-stats-menu').addClass('hidden')
+  $('#auto-log-practices').addClass('hidden')
   $('.table').removeClass('hidden')
   const indexPracticesHtml = indexPracticesTemplate({ practices: data.practices })
   $('.content').html(indexPracticesHtml)
   $('#crud-message').text('List of Practices')
   $('#warning-message').text('')
-  $('#inputGroupSelect').html('')
+  $('#inputGroupSelect').html('<option selected  value="Total" class="light">Total</option>')
   $('#stat-message').text('')
   $('#session-count-span').text('')
   $('#time-count-span').text('')
@@ -28,19 +34,20 @@ const indexPracticesSuccess = function (data) {
 function parser (data) {
   const stats = {}
   for (let i = 0; i < data.length; i++) {
-    stats[Math.floor(new Date(data[i].created_at).getTime() / 1000)] = data[i].duration
+    stats[Math.floor(new Date(data[i].date).getTime() / 1000)] = data[i].duration
   }
   return stats
 }
 
 const getPracticeStatsSuccess = function (data) {
+  console.log(data)
   const statData = {}
   if (store.instrumentStat === 'Total') {
     const totalTime = data.practices.reduce(function (prev, cur) {
       return prev + cur.duration
     }, 0)
     statData.jsonObj = JSON.stringify(parser(data.practices))
-    statData.totalTime = totalTime
+    statData.totalTime = totalTime / 60
     statData.totalSessions = data.practices.length
   } else {
     const singleInstrumentArray = data.practices.filter(x => x.instrument === store.instrumentStat)
@@ -48,7 +55,7 @@ const getPracticeStatsSuccess = function (data) {
       return prev + cur.duration
     }, 0)
     statData.jsonObj = JSON.stringify(parser(singleInstrumentArray))
-    statData.totalTime = totalTime
+    statData.totalTime = totalTime / 60
     statData.totalSessions = singleInstrumentArray.length
   }
   statData.instrument = store.instrumentStat
@@ -60,7 +67,7 @@ const getPracticeStatsSuccess = function (data) {
 const createPracticeSuccess = function (data) {
   $('#crud-message').text('Created New Practice!')
   $('#warning-message').text('')
-  $('#create-prt')[0].reset('')
+  // $('#create-prt')[0].reset('')
 }
 
 const updatePracticeSuccess = function (data) {
